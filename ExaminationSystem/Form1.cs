@@ -5,6 +5,7 @@ namespace ExaminationSystem
         public Form1()
         {
             InitializeComponent();
+            var x = 0;
         }
     }
 }
