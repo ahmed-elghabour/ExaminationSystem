@@ -1,57 +1,59 @@
 using System.Diagnostics;
-//using BLL.Context;
-//using BLL.Entities;
+using ExaminationSystem.Context;
+using ExaminationSystem.Entities;
+using ExaminationSystem.Types;
 
 namespace ExaminationSystem
 {
     public partial class LoginForm : Form
     {
-        //HotelManagementSystemContext context = new();
+        ExaminationContext context = new();
         public LoginForm()
         {
             InitializeComponent();
-            // Adding Type values to the ComboBox
-            //foreach (var t in Enum.GetValues(typeof(UserType)))
-            //{
-            //    this.CBType.Items.Add(t);
-            //}
-            //if (this.CBType.Items.Count > 1)
-            //    CBType.SelectedIndex = 0;
+            //Adding Type values to the ComboBox
+            foreach (var t in Enum.GetValues(typeof(UserType)))
+            {
+                this.CBType.Items.Add(t);
+            }
+            if (this.CBType.Items.Count > 1)
+                CBType.SelectedIndex = 0;
 
-            // Dispose Context on Form Closing
-            //this.FormClosing += (e, v) => context?.Dispose();
+            //Dispose Context on Form Closing
+            this.FormClosing += (e, v) => context?.Dispose();
         }
 
         private void BtnLogin_Click(object sender, EventArgs e)
         {   // watting msg
             LogSuccess("Please wait. Verifying ...");
 
-            // Searh User
-            //User? user = context?.Users?.FirstOrDefault(
-            //    user =>
-            //        user.Username == this.TBUsername.Text.Trim() &&
-            //        user.Password == this.TBPassword.Text.Trim() &&
-            //        user.Type == (UserType)this.CBType.SelectedIndex
-            //);
 
-            //// Validate User
-            //if (user == null)
-            //{
-            //    LogError("Incorrect username or password.");
-            //    return;
-            //}
 
-            //// Redirect User Accorting to it's Type
-            //if (user.Type == UserType.Frontend)
-            //{
-            //    return;
-            //}
+            // Redirect User Accorting to it's Type
+            if ((UserType)this.CBType.SelectedIndex == UserType.Instructor)
+            {
+                // Validate User
+                var user = context?.InstructorLogins?.FirstOrDefault(
+                    user =>
+                        user.UserName == this.TBUsername.Text.Trim() &&
+                        user.Password == this.TBPassword.Text.Trim()
+                );
 
-            //if (user.Type == UserType.Frontend)
-            //{
-            //    //return;
-            //}
-            LogError("Undefined Error Occurs! :(");
+                InstructorForm insForm = new() { ID = user?.InsId ?? -1 };
+                insForm.Show();
+                this.Hide();
+                return;
+            }
+
+            if ((UserType)this.CBType.SelectedIndex == UserType.Student)
+            {
+                // Validate User
+
+                return;
+            }
+
+            LogError("Incorrect username or password.");
+            //LogError("Undefined Error Occurs! :(");
         }
 
         void LogError(string msg)

@@ -11,12 +11,11 @@ namespace ExaminationSystem
         ExaminationContext Context = new ExaminationContext();
         public InstructorForm()
         {
-            // TODO ID
             InitializeComponent();
             DepartmentNamesFromDataBase();
-            CourseNamesFromDataBase(1);
-            LoadInstructorData(1);
-            GetInstructorCourses(1);
+            CourseNamesFromDataBase(ID);
+            LoadInstructorData(ID);
+            GetInstructorCourses(ID);
         }
 
         private void LoadInstructorData(int id)
@@ -101,17 +100,18 @@ namespace ExaminationSystem
 
         private void UpdateBTN_Click(object sender, EventArgs e)
         {
-            //TODO   id
             try
             {
-                int id = 1;
-                var Instructor = Context.Instructors.FromSqlRaw($"exec SP_SelectInstructor {id}").AsEnumerable().FirstOrDefault();
-                Instructor.InsName = NameTXT.Text;
-                Instructor.Degree = DegreeBox.SelectedItem.ToString();
-                Instructor.Salary = (int)SalaryNum.Value;
-                string departmentName = DepartmentBox.SelectedItem.ToString();
-                var Department = Context.Departments.FirstOrDefault(d => d.DeptName == departmentName);
-                Instructor.DeptId = Department.DeptId;
+                var Instructor = Context.Instructors?.FromSql($"exec SP_SelectInstructor {ID}").AsEnumerable().FirstOrDefault();
+                if (Instructor != null)
+                {
+                    Instructor.InsName = NameTXT.Text;
+                    Instructor.Degree = DegreeBox?.SelectedItem?.ToString();
+                    Instructor.Salary = (int)SalaryNum.Value;
+                    string departmentName = DepartmentBox?.SelectedItem?.ToString() ?? String.Empty;
+                    var Department = Context.Departments.FirstOrDefault(d => d.DeptName == departmentName);
+                    Instructor.DeptId = Department?.DeptId;
+                }
                 Context.SaveChanges();
                 MessageBox.Show(this, "Instructor data updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -123,9 +123,9 @@ namespace ExaminationSystem
 
         private void SignOutBtn_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            LoginForm logForm = new LoginForm();
+            LoginForm logForm = new();
             logForm.Show();
+            this.Hide();
         }
 
         private void InstructorForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -140,7 +140,7 @@ namespace ExaminationSystem
                 int TFnumber = (int)TFNum.Value;
                 int MCQnumber = (int)MCQnum.Value;
                 int duration = (int)DurationNum.Value;
-                string CourseName = CrsBox.SelectedItem.ToString();
+                string CourseName = CrsBox?.SelectedItem?.ToString() ?? String.Empty;
                 Context.Database.ExecuteSqlRaw("exec SP_GenerateExam @p0, @p1, @p2, @p3", CourseName, TFnumber, MCQnumber, duration);
                 Context.SaveChanges();
                 MessageBox.Show(this, "Exam created successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
