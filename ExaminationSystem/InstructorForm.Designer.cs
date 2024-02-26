@@ -42,11 +42,12 @@
             tabPage2 = new TabPage();
             CoursesBox = new ListBox();
             tabPage1 = new TabPage();
+            SignOutBtn = new Button();
             UpdateBTN = new Button();
             DegreeBox = new ComboBox();
             SalaryNum = new NumericUpDown();
             DepartmentBox = new ComboBox();
-            textBox1 = new TextBox();
+            NameTXT = new TextBox();
             SalaryLbl = new Label();
             DegreeLbl = new Label();
             DepartmentLbl = new Label();
@@ -205,11 +206,12 @@
             // 
             tabPage1.BackgroundImage = (Image)resources.GetObject("tabPage1.BackgroundImage");
             tabPage1.BackgroundImageLayout = ImageLayout.Stretch;
+            tabPage1.Controls.Add(SignOutBtn);
             tabPage1.Controls.Add(UpdateBTN);
             tabPage1.Controls.Add(DegreeBox);
             tabPage1.Controls.Add(SalaryNum);
             tabPage1.Controls.Add(DepartmentBox);
-            tabPage1.Controls.Add(textBox1);
+            tabPage1.Controls.Add(NameTXT);
             tabPage1.Controls.Add(SalaryLbl);
             tabPage1.Controls.Add(DegreeLbl);
             tabPage1.Controls.Add(DepartmentLbl);
@@ -221,6 +223,19 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Edit";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // SignOutBtn
+            // 
+            SignOutBtn.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            SignOutBtn.BackColor = Color.DarkSalmon;
+            SignOutBtn.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            SignOutBtn.ForeColor = SystemColors.ControlText;
+            SignOutBtn.Location = new Point(625, 358);
+            SignOutBtn.Name = "SignOutBtn";
+            SignOutBtn.Size = new Size(146, 36);
+            SignOutBtn.TabIndex = 10;
+            SignOutBtn.Text = "Sign Out";
+            SignOutBtn.UseVisualStyleBackColor = false;
             // 
             // UpdateBTN
             // 
@@ -234,6 +249,7 @@
             UpdateBTN.TabIndex = 9;
             UpdateBTN.Text = "Update";
             UpdateBTN.UseVisualStyleBackColor = false;
+            UpdateBTN.Click += UpdateBTN_Click;
             // 
             // DegreeBox
             // 
@@ -257,18 +273,17 @@
             // 
             DepartmentBox.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             DepartmentBox.FormattingEnabled = true;
-            DepartmentBox.Items.AddRange(new object[] { "[Dept_Name]" });
             DepartmentBox.Location = new Point(402, 231);
             DepartmentBox.Name = "DepartmentBox";
             DepartmentBox.Size = new Size(226, 28);
             DepartmentBox.TabIndex = 6;
             // 
-            // textBox1
+            // NameTXT
             // 
-            textBox1.Location = new Point(99, 101);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(238, 27);
-            textBox1.TabIndex = 4;
+            NameTXT.Location = new Point(99, 101);
+            NameTXT.Name = "NameTXT";
+            NameTXT.Size = new Size(238, 27);
+            NameTXT.TabIndex = 4;
             // 
             // SalaryLbl
             // 
@@ -377,7 +392,7 @@
         private ComboBox DegreeBox;
         private NumericUpDown SalaryNum;
         private ComboBox DepartmentBox;
-        private TextBox textBox1;
+        private TextBox NameTXT;
         private Label SalaryLbl;
         private Label DegreeLbl;
         private Label DepartmentLbl;
@@ -390,5 +405,6 @@
         private NumericUpDown DurationNum;
         private ComboBox comboBox1;
         private TextBox textBox2;
+        private Button SignOutBtn;
     }
 }
