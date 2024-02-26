@@ -1,11 +1,10 @@
 namespace ExaminationSystem
 {
-    public partial class Form1 : Form
+    public partial class InstructorForm : Form
     {
-        public Form1()
+        public InstructorForm()
         {
             InitializeComponent();
-            var x = 0;
         }
     }
 }
