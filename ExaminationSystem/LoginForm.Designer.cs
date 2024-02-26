@@ -87,7 +87,7 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(0, 170, 173);
-            panel1.BackgroundImage = Properties.Resources.loginBg1;
+            panel1.BackgroundImage = Properties.Resources.loginBg;
             panel1.Location = new Point(-1, 1);
             panel1.Name = "panel1";
             panel1.Size = new Size(351, 418);
