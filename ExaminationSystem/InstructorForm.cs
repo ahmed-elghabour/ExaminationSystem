@@ -25,18 +25,11 @@ namespace ExaminationSystem
                     NameTXT.Text = instructor.InsName.ToString();
                     SalaryNum.Value = instructor.Salary;
                     DegreeBox.SelectedItem = instructor.Degree;
-                    try
+                    var Department = Context.Departments.FromSql($"exec SP_SelectDepartment {instructor.DeptId}").ToList();
+                    if (Department.Count > 0)
                     {
-                        var Department = Context.Departments.FromSql($"exec SP_SelectDepartment {instructor.DeptId}").ToList();
-                        if (Department.Count > 0)
-                        {
-                            var DeptName = Department.First();
-                            DepartmentBox.SelectedItem = DeptName.DeptName;
-                        }
-                    }
-                    catch
-                    {
-                        MessageBox.Show(this, "Instructor doesn\'t assigned to department", "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
+                        var DeptName = Department.First();
+                        DepartmentBox.SelectedItem = DeptName.DeptName;
                     }
                 }
             }
@@ -57,8 +50,36 @@ namespace ExaminationSystem
 
         private void UpdateBTN_Click(object sender, EventArgs e)
         {
-            //var InstructorData = Context.Instructors.FromSql($"exec SP_SelectInstructor {id}");
+            //TODO   id
+            try
+            {
+                int id = 1;
+                var Instructor = Context.Instructors.FromSqlRaw($"exec SP_SelectInstructor {id}").AsEnumerable().FirstOrDefault();
+                Instructor.InsName = NameTXT.Text;
+                Instructor.Degree = DegreeBox.SelectedItem.ToString();
+                Instructor.Salary = (int)SalaryNum.Value;
+                string departmentName = DepartmentBox.SelectedItem.ToString();
+                var Department = Context.Departments.FirstOrDefault(d => d.DeptName == departmentName);
+                Instructor.DeptId = Department.DeptId;
+                Context.SaveChanges();
+                MessageBox.Show(this, "Instructor data updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
+            }
+        }
 
+        private void SignOutBtn_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            LoginForm logForm = new LoginForm();
+            logForm.Show();
+        }
+
+        private void InstructorForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

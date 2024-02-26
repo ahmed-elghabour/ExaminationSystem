@@ -15,7 +15,7 @@ namespace ExaminationSystem
 
 
 
-            Application.Run(new LoginForm());
+            Application.Run(new InstructorForm());
         }
     }
 }

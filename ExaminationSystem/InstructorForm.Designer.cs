@@ -236,6 +236,7 @@
             SignOutBtn.TabIndex = 10;
             SignOutBtn.Text = "Sign Out";
             SignOutBtn.UseVisualStyleBackColor = false;
+            SignOutBtn.Click += SignOutBtn_Click;
             // 
             // UpdateBTN
             // 
@@ -364,6 +365,7 @@
             Controls.Add(tabControl1);
             Name = "InstructorForm";
             Text = "Instructor";
+            FormClosing += InstructorForm_FormClosing;
             tabPage4.ResumeLayout(false);
             tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)MCQnum).EndInit();
