@@ -38,22 +38,38 @@ namespace ExaminationSystem
                         user.UserName == this.TBUsername.Text.Trim() &&
                         user.Password == this.TBPassword.Text.Trim()
                 );
-
-                InstructorForm insForm = new() { ID = user?.InsId ?? -1 };
-                insForm.Show();
-                this.Hide();
-                return;
+                if (user != null)
+                {
+                    InstructorForm insForm = new(user?.InsId ?? -1);
+                    insForm.Show();
+                    this.Hide();
+                    return;
+                }
             }
 
             if ((UserType)this.CBType.SelectedIndex == UserType.Student)
             {
-                // Validate User
 
-                return;
+                // Validate User
+                var user = context?.StudentLogins.FirstOrDefault(
+                    user =>
+                        user.UserName == this.TBUsername.Text.Trim() &&
+                        user.Password == this.TBPassword.Text.Trim()
+                );
+                if (user != null)
+                {
+                    // User Form
+                    //InstructorForm insForm = new() { ID = user?.StdId ?? -1 };
+                    //insForm.Show();
+                    //this.Hide();
+                    LogError("Undefined Error Occurs! :(");
+                    return;
+
+                }
             }
 
             LogError("Incorrect username or password.");
-            //LogError("Undefined Error Occurs! :(");
+
         }
 
         void LogError(string msg)

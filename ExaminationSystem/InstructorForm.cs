@@ -8,9 +8,10 @@ namespace ExaminationSystem
     public partial class InstructorForm : Form
     {
         public int ID { get; init; }
-        ExaminationContext Context = new ExaminationContext();
-        public InstructorForm()
+        ExaminationContext Context = new();
+        public InstructorForm(int id)
         {
+            ID = id;
             InitializeComponent();
             DepartmentNamesFromDataBase();
             CourseNamesFromDataBase(ID);
@@ -20,6 +21,7 @@ namespace ExaminationSystem
 
         private void LoadInstructorData(int id)
         {
+            //Trace.WriteLine($"Ins ID: {ID}");
             try
             {
                 var InstructorData = Context.Instructors.FromSql($"exec SP_SelectInstructor {id}").ToList();
