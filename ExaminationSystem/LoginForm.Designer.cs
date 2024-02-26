@@ -90,6 +90,7 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(0, 170, 173);
+            panel1.BackgroundImage = Properties.Resources.loginBg;
             panel1.BackgroundImage = (Image)resources.GetObject("panel1.BackgroundImage");
             panel1.Location = new Point(-1, 1);
             panel1.Margin = new Padding(3, 4, 3, 4);
