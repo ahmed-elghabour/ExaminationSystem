@@ -1,4 +1,5 @@
 using ExaminationSystem.Context;
+using ExaminationSystem.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
@@ -6,12 +7,16 @@ namespace ExaminationSystem
 {
     public partial class InstructorForm : Form
     {
+        public int ID { get; init; }
         ExaminationContext Context = new ExaminationContext();
         public InstructorForm()
         {
+            // TODO ID
             InitializeComponent();
             DepartmentNamesFromDataBase();
+            CourseNamesFromDataBase(1);
             LoadInstructorData(1);
+            GetInstructorCourses(1);
         }
 
         private void LoadInstructorData(int id)
@@ -38,6 +43,7 @@ namespace ExaminationSystem
                 MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
             }
         }
+
         private void DepartmentNamesFromDataBase()
         {
             var Departments = Context.Departments.ToList();
@@ -46,6 +52,51 @@ namespace ExaminationSystem
                 string DeptName = dept.DeptName.ToString();
                 DepartmentBox.Items.Add(DeptName);
             }
+        }
+
+        private void CourseNamesFromDataBase(int id)
+        {
+            var courses = from c in Context.Courses
+                          where c.Instructors.Any(c => c.InsId == id)
+                          select c.CourseName;
+            if (courses != null)
+            {
+                foreach (var course in courses)
+                {
+                    CrsBox.Items.Add(course);
+                }
+            }
+            else
+                CrsBox.Text = "No courses to teach";
+
+        }
+
+        private void GetInstructorCourses(int id)
+        {
+            try
+            {
+                CoursesBox.Items.Clear();
+                var courses = from c in Context.Courses
+                              where c.Instructors.Any(c => c.InsId == id)
+                              select c.CourseName;
+                if (courses != null)
+                {
+                    foreach (var course in courses)
+                    {
+                        CoursesBox.Items.Add(course);
+                    }
+                }
+                else
+                    CoursesBox.Text = "No courses to teach";
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
+            }
+
+
         }
 
         private void UpdateBTN_Click(object sender, EventArgs e)
@@ -80,6 +131,24 @@ namespace ExaminationSystem
         private void InstructorForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void createBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int TFnumber = (int)TFNum.Value;
+                int MCQnumber = (int)MCQnum.Value;
+                int duration = (int)DurationNum.Value;
+                string CourseName = CrsBox.SelectedItem.ToString();
+                Context.Database.ExecuteSqlRaw("exec SP_GenerateExam @p0, @p1, @p2, @p3", CourseName, TFnumber, MCQnumber, duration);
+                Context.SaveChanges();
+                MessageBox.Show(this, "Exam created successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
+            }
         }
     }
 }

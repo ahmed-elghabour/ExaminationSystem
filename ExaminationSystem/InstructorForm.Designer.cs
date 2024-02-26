@@ -96,6 +96,7 @@
             createBtn.TabIndex = 8;
             createBtn.Text = "Create";
             createBtn.UseVisualStyleBackColor = false;
+            createBtn.Click += createBtn_Click;
             // 
             // MCQnum
             // 
@@ -127,11 +128,11 @@
             // CrsBox
             // 
             CrsBox.FormattingEnabled = true;
-            CrsBox.Items.AddRange(new object[] { "[Course_Name]" });
             CrsBox.Location = new Point(107, 133);
             CrsBox.Name = "CrsBox";
             CrsBox.Size = new Size(249, 28);
             CrsBox.TabIndex = 4;
+            CrsBox.Text = "Choose course";
             // 
             // TFLbl
             // 
