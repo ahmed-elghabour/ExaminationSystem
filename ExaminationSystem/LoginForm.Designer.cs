@@ -156,7 +156,7 @@
             LMsg.Size = new Size(0, 15);
             LMsg.TabIndex = 9;
             // 
-            // Login
+            // LoginForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -176,9 +176,9 @@
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "Login";
+            Name = "LoginForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Hotel Management System | Login";
+            Text = "Examination System | Login";
             ResumeLayout(false);
             PerformLayout();
         }
