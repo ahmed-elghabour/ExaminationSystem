@@ -55,6 +55,8 @@
             LStudentName = new Label();
             panel3 = new Panel();
             CBFlag = new CheckBox();
+            label7 = new Label();
+            LTimer = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel4.SuspendLayout();
@@ -385,12 +387,36 @@
             CBFlag.UseVisualStyleBackColor = true;
             CBFlag.CheckedChanged += CBFlag_CheckedChanged;
             // 
+            // label7
+            // 
+            label7.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label7.Location = new Point(687, 385);
+            label7.Name = "label7";
+            label7.Size = new Size(62, 25);
+            label7.TabIndex = 11;
+            label7.Text = "Time: ";
+            // 
+            // LTimer
+            // 
+            LTimer.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            LTimer.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            LTimer.Location = new Point(755, 379);
+            LTimer.Name = "LTimer";
+            LTimer.Size = new Size(217, 39);
+            LTimer.TabIndex = 12;
+            LTimer.Text = "00:00:00";
+            LTimer.TextAlign = ContentAlignment.MiddleLeft;
+            // 
             // ExamForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(984, 511);
+            Controls.Add(LTimer);
+            Controls.Add(label7);
             Controls.Add(CBFlag);
             Controls.Add(panel3);
             Controls.Add(LStudentName);
@@ -404,6 +430,7 @@
             MinimumSize = new Size(1000, 550);
             Name = "ExamForm";
             Text = "Exam Form";
+            FormClosing += ExamForm_FormClosing;
             Load += ExamForm_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -445,5 +472,7 @@
         private Label LQuestChoices4;
         private Label label6;
         private Label label1;
+        private Label label7;
+        private Label LTimer;
     }
 }

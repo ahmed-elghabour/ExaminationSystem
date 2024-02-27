@@ -17,6 +17,7 @@ namespace ExaminationSystem
 {
     public partial class ExamForm : Form
     {
+        public TimeSpan Time { get; set; }
         int ExamID = 5;
         int studentID = 2;
         readonly ExaminationContext Context = new();
@@ -31,7 +32,40 @@ namespace ExaminationSystem
         {
             InitializeComponent();
 
-            this.FormClosing += (e, v) => Context?.Dispose();
+            this.FormClosed += (e, v) => Context?.Dispose();
+        }
+        void UpdateLTimerText(string text)
+        {
+            try
+            {
+                if (LTimer.InvokeRequired)
+                {
+                    // If we're not on the UI thread, invoke this method recursively on the UI thread
+                    LTimer.Invoke(new Action<string>(UpdateLTimerText), text);
+                }
+                else
+                {
+                    // We're on the UI thread, update the control directly
+                    LTimer.Text = text;
+                }
+            }
+            catch (Exception ex) { }
+        }
+
+        public void counter(TimeSpan t)
+        {
+            while (t.TotalSeconds >= 0 && this.Visible)
+            {
+                Thread.Sleep(1000);
+
+                string formattedTime = $"{(int)t.TotalHours:D2}:{t.Minutes:D2}:{t.Seconds:D2}";
+
+                //LTimer.Text = formattedTime;
+                UpdateLTimerText(formattedTime);
+
+                t = t.Subtract(TimeSpan.FromSeconds(1));
+            }
+            Submit();
         }
 
         private void ExamForm_Load(object sender, EventArgs e)
@@ -40,8 +74,11 @@ namespace ExaminationSystem
 
             LAcademicYear.Text = GetCurrentAcademicYear();
 
+            Exam exam = Context?.Exams?.FirstOrDefault((e) => e.ExamId == ExamID);
+            //Time = TimeSpan.FromMinutes(exam?.Duration ?? 0);
+            Time = TimeSpan.FromMinutes(0.5);
             // Update Subject
-            int courseID = Context.Exams.FirstOrDefault((e) => e.ExamId == ExamID).CourseId ?? -1;
+            int courseID = exam.CourseId ?? -1;
             if (courseID > 0)
             {
                 string subject = Context.Courses.FirstOrDefault(c => c.CourseId == courseID).CourseName ?? String.Empty;
@@ -120,79 +157,90 @@ namespace ExaminationSystem
                 };
                 oldQustionIndex = 0;
                 updateAnsewrs(AnswerList[QustionBS.Position]);
+
+
+                // start count
+                Thread newThread = new Thread(() => counter(Time));
+                newThread.Start();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         void updateAnsewrs(List<QuestChoice> newAnswer)
         {
-            if (RBQuestChoices1.Checked)
-                UserSolution[oldQustionIndex] = 1;
-            if (RBQuestChoices2.Checked)
-                UserSolution[oldQustionIndex] = 2;
-            if (RBQuestChoices3.Checked)
-                UserSolution[oldQustionIndex] = 3;
-            if (RBQuestChoices4.Checked)
-                UserSolution[oldQustionIndex] = 4;
-
-            UpdateProgressBar(UserSolution.Count(value => value > 0), QustionBS.Count);
-            LProggress.Text = $"{QustionBS.Position + 1}/{QustionBS.Count}";
-
-            Button oldButton = (Button)PanelQustionShortcut.Controls[oldQustionIndex];
-            oldButton.BackColor = Color.White;
-
-            if (UserSolution[oldQustionIndex] != 0)
+            try
             {
-                oldButton.Font = new(oldButton.Font, FontStyle.Bold);
+
+                if (RBQuestChoices1.Checked)
+                    UserSolution[oldQustionIndex] = 1;
+                if (RBQuestChoices2.Checked)
+                    UserSolution[oldQustionIndex] = 2;
+                if (RBQuestChoices3.Checked)
+                    UserSolution[oldQustionIndex] = 3;
+                if (RBQuestChoices4.Checked)
+                    UserSolution[oldQustionIndex] = 4;
+
+                UpdateProgressBar(UserSolution.Count(value => value > 0), QustionBS.Count);
+                LProggress.Text = $"{QustionBS.Position + 1}/{QustionBS.Count}";
+
+                Button oldButton = (Button)PanelQustionShortcut.Controls[oldQustionIndex];
+                oldButton.BackColor = Color.White;
+
+                if (UserSolution[oldQustionIndex] != 0)
+                {
+                    oldButton.Font = new(oldButton.Font, FontStyle.Bold);
+                }
+
+                flagCheckBox = true;
+                if (FlagetQustions.Contains(QustionBS.Position))
+                {
+                    CBFlag.Checked = true;
+                }
+                else
+                {
+                    CBFlag.Checked = false;
+                }
+                flagCheckBox = false;
+                PanelQustionShortcut.Controls[QustionBS.Position].BackColor = ColorTranslator.FromHtml("#EDEDED");
+
+                oldQustionIndex = QustionBS.Position;
+
+
+                RBQuestChoices1.Checked = false;
+                RBQuestChoices2.Checked = false;
+                RBQuestChoices3.Checked = false;
+                RBQuestChoices4.Checked = false;
+
+                if (UserSolution[oldQustionIndex] == 1)
+                    RBQuestChoices1.Checked = true;
+                if (UserSolution[oldQustionIndex] == 2)
+                    RBQuestChoices2.Checked = true;
+                if (UserSolution[oldQustionIndex] == 3)
+                    RBQuestChoices3.Checked = true;
+                if (UserSolution[oldQustionIndex] == 4)
+                    RBQuestChoices4.Checked = true;
+
+
+                if (newAnswer.Count == 2)
+                {
+                    set_TF();
+                    RBQuestChoices1.Text = newAnswer[0].Sentence;
+                    RBQuestChoices2.Text = newAnswer[1].Sentence;
+                }
+                else if (newAnswer.Count == 4)
+                {
+                    set_MCQ();
+                    RBQuestChoices1.Text = newAnswer[0].Sentence;
+                    RBQuestChoices2.Text = newAnswer[1].Sentence;
+                    RBQuestChoices3.Text = newAnswer[2].Sentence;
+                    RBQuestChoices4.Text = newAnswer[3].Sentence;
+                }
+
             }
-
-            flagCheckBox = true;
-            if (FlagetQustions.Contains(QustionBS.Position))
-            {
-                CBFlag.Checked = true;
-            }
-            else
-            {
-                CBFlag.Checked = false;
-            }
-            flagCheckBox = false;
-            PanelQustionShortcut.Controls[QustionBS.Position].BackColor = ColorTranslator.FromHtml("#EDEDED");
-
-            oldQustionIndex = QustionBS.Position;
-
-
-            RBQuestChoices1.Checked = false;
-            RBQuestChoices2.Checked = false;
-            RBQuestChoices3.Checked = false;
-            RBQuestChoices4.Checked = false;
-
-            if (UserSolution[oldQustionIndex] == 1)
-                RBQuestChoices1.Checked = true;
-            if (UserSolution[oldQustionIndex] == 2)
-                RBQuestChoices2.Checked = true;
-            if (UserSolution[oldQustionIndex] == 3)
-                RBQuestChoices3.Checked = true;
-            if (UserSolution[oldQustionIndex] == 4)
-                RBQuestChoices4.Checked = true;
-
-
-            if (newAnswer.Count == 2)
-            {
-                set_TF();
-                RBQuestChoices1.Text = newAnswer[0].Sentence;
-                RBQuestChoices2.Text = newAnswer[1].Sentence;
-            }
-            else if (newAnswer.Count == 4)
-            {
-                set_MCQ();
-                RBQuestChoices1.Text = newAnswer[0].Sentence;
-                RBQuestChoices2.Text = newAnswer[1].Sentence;
-                RBQuestChoices3.Text = newAnswer[2].Sentence;
-                RBQuestChoices4.Text = newAnswer[3].Sentence;
-            }
-
+            catch (Exception ex) { }
         }
 
         void set_MCQ()
@@ -249,12 +297,12 @@ namespace ExaminationSystem
             {
                 var x = Context.Database.ExecuteSql($"EXEC SP_ExamAnswers @ExamID = {ExamID}, @Std_ID = {studentID}, @Answers = {Answers};");
                 Trace.WriteLine(x);
-
+                MessageBox.Show("Exam Submitted Successfully", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
                 Trace.WriteLine(ex.Message);
-                MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -303,6 +351,26 @@ namespace ExaminationSystem
         private void button3_Click(object sender, EventArgs e)
         {
             Submit();
+        }
+
+        private void ExamForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                // Display a message box asking the user if they really want to close the form
+                DialogResult result = MessageBox.Show("Are you sure you want to Submit Exam?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                // If the user clicks "No", cancel the form closing event
+                if (result == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
+                else
+                {
+                    Submit();
+                    Application.Exit();
+                }
+            }
         }
     }
 }
