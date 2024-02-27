@@ -75,8 +75,8 @@ namespace ExaminationSystem
             LAcademicYear.Text = GetCurrentAcademicYear();
 
             Exam exam = Context?.Exams?.FirstOrDefault((e) => e.ExamId == ExamID);
-            //Time = TimeSpan.FromMinutes(exam?.Duration ?? 0);
-            Time = TimeSpan.FromMinutes(0.5);
+            Time = TimeSpan.FromMinutes(exam?.Duration ?? 0);
+            //Time = TimeSpan.FromMinutes(0.5);
             // Update Subject
             int courseID = exam.CourseId ?? -1;
             if (courseID > 0)
@@ -371,6 +371,31 @@ namespace ExaminationSystem
                     Application.Exit();
                 }
             }
+        }
+
+        private void ExamForm_SizeChanged(object sender, EventArgs e)
+        {
+            UpdateProgressBar(UserSolution.Count(value => value > 0), QustionBS.Count);
+        }
+
+        private void RBQuestChoices1_CheckedChanged(object sender, EventArgs e)
+        {
+            //updateAnsewrs(AnswerList[QustionBS.Position]);
+        }
+
+        private void RBQuestChoices2_CheckedChanged(object sender, EventArgs e)
+        {
+            //updateAnsewrs(AnswerList[QustionBS.Position]);
+        }
+
+        private void RBQuestChoices3_CheckedChanged(object sender, EventArgs e)
+        {
+            //updateAnsewrs(AnswerList[QustionBS.Position]);
+        }
+
+        private void RBQuestChoices4_CheckedChanged(object sender, EventArgs e)
+        {
+            //updateAnsewrs(AnswerList[QustionBS.Position]);
         }
     }
 }
