@@ -12,10 +12,8 @@ namespace ExaminationSystem
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-
-
-
-            Application.Run(new InstructorForm());
+            //Application.Run(new LoginForm());
+            Application.Run(new ExamForm());
         }
     }
 }
