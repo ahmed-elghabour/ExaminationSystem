@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StudentForm));
             tabControl1 = new TabControl();
             tabEdit = new TabPage();
+            btnUpdateStudent = new Button();
             label7 = new Label();
             comboBoxDepartment = new ComboBox();
             label6 = new Label();
@@ -45,7 +47,6 @@
             txtAddress = new TextBox();
             txtFirstName = new TextBox();
             tabExam = new TabPage();
-            btnUpdateStudent = new Button();
             tabControl1.SuspendLayout();
             tabEdit.SuspendLayout();
             SuspendLayout();
@@ -62,6 +63,8 @@
             // 
             // tabEdit
             // 
+            tabEdit.BackgroundImage = (Image)resources.GetObject("tabEdit.BackgroundImage");
+            tabEdit.BackgroundImageLayout = ImageLayout.Stretch;
             tabEdit.Controls.Add(btnUpdateStudent);
             tabEdit.Controls.Add(label7);
             tabEdit.Controls.Add(comboBoxDepartment);
@@ -77,6 +80,7 @@
             tabEdit.Controls.Add(txtLastName);
             tabEdit.Controls.Add(txtAddress);
             tabEdit.Controls.Add(txtFirstName);
+            tabEdit.ForeColor = Color.White;
             tabEdit.Location = new Point(4, 29);
             tabEdit.Name = "tabEdit";
             tabEdit.Padding = new Padding(3);
@@ -85,10 +89,26 @@
             tabEdit.Text = "Edit";
             tabEdit.UseVisualStyleBackColor = true;
             // 
+            // btnUpdateStudent
+            // 
+            btnUpdateStudent.BackColor = Color.DeepSkyBlue;
+            btnUpdateStudent.FlatAppearance.BorderSize = 0;
+            btnUpdateStudent.FlatStyle = FlatStyle.Flat;
+            btnUpdateStudent.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnUpdateStudent.ForeColor = Color.White;
+            btnUpdateStudent.Location = new Point(506, 247);
+            btnUpdateStudent.Name = "btnUpdateStudent";
+            btnUpdateStudent.Size = new Size(211, 57);
+            btnUpdateStudent.TabIndex = 14;
+            btnUpdateStudent.Text = "Update";
+            btnUpdateStudent.UseVisualStyleBackColor = false;
+            btnUpdateStudent.Click += btnUpdateStudent_Click;
+            // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(52, 326);
+            label7.ForeColor = SystemColors.ButtonHighlight;
+            label7.Location = new Point(411, 199);
             label7.Name = "label7";
             label7.Size = new Size(89, 20);
             label7.TabIndex = 13;
@@ -97,7 +117,7 @@
             // comboBoxDepartment
             // 
             comboBoxDepartment.FormattingEnabled = true;
-            comboBoxDepartment.Location = new Point(147, 323);
+            comboBoxDepartment.Location = new Point(506, 196);
             comboBoxDepartment.Name = "comboBoxDepartment";
             comboBoxDepartment.Size = new Size(211, 28);
             comboBoxDepartment.TabIndex = 12;
@@ -105,7 +125,8 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(91, 277);
+            label6.ForeColor = SystemColors.ButtonHighlight;
+            label6.Location = new Point(450, 146);
             label6.Name = "label6";
             label6.Size = new Size(50, 20);
             label6.TabIndex = 11;
@@ -113,7 +134,7 @@
             // 
             // txtPhoneNumber
             // 
-            txtPhoneNumber.Location = new Point(147, 274);
+            txtPhoneNumber.Location = new Point(506, 146);
             txtPhoneNumber.Name = "txtPhoneNumber";
             txtPhoneNumber.Size = new Size(211, 27);
             txtPhoneNumber.TabIndex = 10;
@@ -122,7 +143,7 @@
             // 
             dateTimeBirthDate.CustomFormat = "";
             dateTimeBirthDate.Format = DateTimePickerFormat.Short;
-            dateTimeBirthDate.Location = new Point(147, 230);
+            dateTimeBirthDate.Location = new Point(506, 96);
             dateTimeBirthDate.MaxDate = new DateTime(2010, 1, 1, 0, 0, 0, 0);
             dateTimeBirthDate.MinDate = new DateTime(1980, 1, 1, 0, 0, 0, 0);
             dateTimeBirthDate.Name = "dateTimeBirthDate";
@@ -133,7 +154,8 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(63, 230);
+            label5.ForeColor = SystemColors.ButtonHighlight;
+            label5.Location = new Point(422, 96);
             label5.Name = "label5";
             label5.Size = new Size(76, 20);
             label5.TabIndex = 8;
@@ -142,7 +164,8 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(84, 181);
+            label4.ForeColor = SystemColors.ButtonHighlight;
+            label4.Location = new Point(54, 279);
             label4.Name = "label4";
             label4.Size = new Size(57, 20);
             label4.TabIndex = 7;
@@ -152,7 +175,7 @@
             // 
             comboBoxGender.FormattingEnabled = true;
             comboBoxGender.Items.AddRange(new object[] { "Male", "Female" });
-            comboBoxGender.Location = new Point(147, 178);
+            comboBoxGender.Location = new Point(117, 278);
             comboBoxGender.Name = "comboBoxGender";
             comboBoxGender.Size = new Size(211, 28);
             comboBoxGender.TabIndex = 6;
@@ -160,7 +183,8 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(79, 133);
+            label3.ForeColor = SystemColors.ButtonHighlight;
+            label3.Location = new Point(49, 220);
             label3.Name = "label3";
             label3.Size = new Size(62, 20);
             label3.TabIndex = 5;
@@ -169,7 +193,8 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(62, 84);
+            label2.ForeColor = SystemColors.ButtonHighlight;
+            label2.Location = new Point(32, 161);
             label2.Name = "label2";
             label2.Size = new Size(79, 20);
             label2.TabIndex = 4;
@@ -178,7 +203,8 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(61, 35);
+            label1.ForeColor = SystemColors.ButtonHighlight;
+            label1.Location = new Point(31, 102);
             label1.Name = "label1";
             label1.Size = new Size(80, 20);
             label1.TabIndex = 3;
@@ -186,21 +212,21 @@
             // 
             // txtLastName
             // 
-            txtLastName.Location = new Point(147, 80);
+            txtLastName.Location = new Point(117, 158);
             txtLastName.Name = "txtLastName";
             txtLastName.Size = new Size(211, 27);
             txtLastName.TabIndex = 2;
             // 
             // txtAddress
             // 
-            txtAddress.Location = new Point(147, 129);
+            txtAddress.Location = new Point(117, 218);
             txtAddress.Name = "txtAddress";
             txtAddress.Size = new Size(211, 27);
             txtAddress.TabIndex = 1;
             // 
             // txtFirstName
             // 
-            txtFirstName.Location = new Point(147, 31);
+            txtFirstName.Location = new Point(117, 98);
             txtFirstName.Name = "txtFirstName";
             txtFirstName.Size = new Size(211, 27);
             txtFirstName.TabIndex = 0;
@@ -213,16 +239,6 @@
             tabExam.TabIndex = 2;
             tabExam.Text = "Exam";
             tabExam.UseVisualStyleBackColor = true;
-            // 
-            // btnUpdateStudent
-            // 
-            btnUpdateStudent.Location = new Point(603, 326);
-            btnUpdateStudent.Name = "btnUpdateStudent";
-            btnUpdateStudent.Size = new Size(159, 61);
-            btnUpdateStudent.TabIndex = 14;
-            btnUpdateStudent.Text = "Update";
-            btnUpdateStudent.UseVisualStyleBackColor = true;
-            btnUpdateStudent.Click += btnUpdateStudent_Click;
             // 
             // StudentForm
             // 
