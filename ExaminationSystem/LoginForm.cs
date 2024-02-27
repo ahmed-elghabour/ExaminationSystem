@@ -1,3 +1,10 @@
+/**
+ * @title Login Form
+ * @author A.Rahman Khallaf
+ * @date February 27, 2024 
+ * @description Examination System | Login Form
+ */
+
 using System.Diagnostics;
 using ExaminationSystem.Context;
 using ExaminationSystem.Entities;
@@ -59,15 +66,15 @@ namespace ExaminationSystem
                 if (user != null)
                 {
                     // User Form
-                    //InstructorForm insForm = new() { ID = user?.StdId ?? -1 };
-                    //insForm.Show();
-                    //this.Hide();
-                    LogError("Undefined Error Occurs! :(");
+                    StudentForm insForm = new(user?.StdId ?? -1);
+                    insForm.Show();
+                    this.Hide();
                     return;
 
                 }
             }
 
+            //LogError("Undefined Error Occurs! :(");
             LogError("Incorrect username or password.");
 
         }

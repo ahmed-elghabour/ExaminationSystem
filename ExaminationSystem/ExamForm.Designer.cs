@@ -48,17 +48,22 @@
             RBQuestChoices2 = new RadioButton();
             RBQuestChoices1 = new RadioButton();
             PanelQustionShortcut = new Panel();
-            button3 = new Button();
+            BTNSubmit = new Button();
             panel4 = new Panel();
             PanelProgressBar = new Panel();
             label3 = new Label();
             LStudentName = new Label();
             panel3 = new Panel();
             CBFlag = new CheckBox();
+            label7 = new Label();
+            LTimer = new Label();
+            textBox1 = new TextBox();
+            panel5 = new Panel();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel4.SuspendLayout();
             panel3.SuspendLayout();
+            panel5.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -258,6 +263,7 @@
             RBQuestChoices4.TabStop = true;
             RBQuestChoices4.Text = "radioButton4";
             RBQuestChoices4.UseVisualStyleBackColor = true;
+            RBQuestChoices4.CheckedChanged += RBQuestChoices4_CheckedChanged;
             // 
             // RBQuestChoices3
             // 
@@ -270,6 +276,7 @@
             RBQuestChoices3.TabStop = true;
             RBQuestChoices3.Text = "radioButton3";
             RBQuestChoices3.UseVisualStyleBackColor = true;
+            RBQuestChoices3.CheckedChanged += RBQuestChoices3_CheckedChanged;
             // 
             // RBQuestChoices2
             // 
@@ -282,6 +289,7 @@
             RBQuestChoices2.TabStop = true;
             RBQuestChoices2.Text = "radioButton2";
             RBQuestChoices2.UseVisualStyleBackColor = true;
+            RBQuestChoices2.CheckedChanged += RBQuestChoices2_CheckedChanged;
             // 
             // RBQuestChoices1
             // 
@@ -294,6 +302,7 @@
             RBQuestChoices1.TabStop = true;
             RBQuestChoices1.Text = "radioButton1";
             RBQuestChoices1.UseVisualStyleBackColor = true;
+            RBQuestChoices1.CheckedChanged += RBQuestChoices1_CheckedChanged;
             // 
             // PanelQustionShortcut
             // 
@@ -309,37 +318,37 @@
             PanelQustionShortcut.Size = new Size(286, 279);
             PanelQustionShortcut.TabIndex = 3;
             // 
-            // button3
+            // BTNSubmit
             // 
-            button3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button3.Cursor = Cursors.Hand;
-            button3.Location = new Point(873, 44);
-            button3.Name = "button3";
-            button3.Size = new Size(104, 31);
-            button3.TabIndex = 4;
-            button3.Text = "Submit";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
+            BTNSubmit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            BTNSubmit.Cursor = Cursors.Hand;
+            BTNSubmit.Location = new Point(873, 44);
+            BTNSubmit.Name = "BTNSubmit";
+            BTNSubmit.Size = new Size(104, 31);
+            BTNSubmit.TabIndex = 4;
+            BTNSubmit.Text = "Submit";
+            BTNSubmit.UseVisualStyleBackColor = true;
+            BTNSubmit.Click += BTNSubmit_Click;
             // 
             // panel4
             // 
-            panel4.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel4.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel4.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel4.BackColor = Color.WhiteSmoke;
             panel4.Controls.Add(PanelProgressBar);
-            panel4.Location = new Point(9, 461);
+            panel4.Location = new Point(9, 431);
             panel4.Name = "panel4";
             panel4.Size = new Size(968, 19);
             panel4.TabIndex = 5;
             // 
             // PanelProgressBar
             // 
-            PanelProgressBar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            PanelProgressBar.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             PanelProgressBar.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             PanelProgressBar.BackColor = Color.FromArgb(255, 192, 128);
             PanelProgressBar.Location = new Point(0, 0);
             PanelProgressBar.Name = "PanelProgressBar";
-            PanelProgressBar.Size = new Size(0, 19);
+            PanelProgressBar.Size = new Size(20, 19);
             PanelProgressBar.TabIndex = 0;
             // 
             // label3
@@ -385,18 +394,63 @@
             CBFlag.UseVisualStyleBackColor = true;
             CBFlag.CheckedChanged += CBFlag_CheckedChanged;
             // 
+            // label7
+            // 
+            label7.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label7.Location = new Point(687, 385);
+            label7.Name = "label7";
+            label7.Size = new Size(62, 25);
+            label7.TabIndex = 11;
+            label7.Text = "Time: ";
+            // 
+            // LTimer
+            // 
+            LTimer.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            LTimer.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            LTimer.Location = new Point(755, 379);
+            LTimer.Name = "LTimer";
+            LTimer.Size = new Size(217, 39);
+            LTimer.TabIndex = 12;
+            LTimer.Text = "00:00:00";
+            LTimer.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // textBox1
+            // 
+            textBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            textBox1.Location = new Point(2, 2);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(963, 48);
+            textBox1.TabIndex = 13;
+            textBox1.Text = "Notes:\r\nAdd Your Temp notes Here It will be removed after the end of the exam.";
+            // 
+            // panel5
+            // 
+            panel5.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel5.BackColor = Color.FromArgb(49, 123, 209);
+            panel5.Controls.Add(textBox1);
+            panel5.Location = new Point(9, 456);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(968, 51);
+            panel5.TabIndex = 14;
+            // 
             // ExamForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(984, 511);
+            Controls.Add(panel5);
+            Controls.Add(LTimer);
+            Controls.Add(label7);
             Controls.Add(CBFlag);
             Controls.Add(panel3);
             Controls.Add(LStudentName);
             Controls.Add(label3);
             Controls.Add(panel4);
-            Controls.Add(button3);
+            Controls.Add(BTNSubmit);
             Controls.Add(panel2);
             Controls.Add(BTNPreviousQuestion);
             Controls.Add(BTNNextQuestion);
@@ -404,13 +458,17 @@
             MinimumSize = new Size(1000, 550);
             Name = "ExamForm";
             Text = "Exam Form";
+            FormClosing += ExamForm_FormClosing;
             Load += ExamForm_Load;
+            SizeChanged += ExamForm_SizeChanged;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             panel4.ResumeLayout(false);
             panel3.ResumeLayout(false);
+            panel5.ResumeLayout(false);
+            panel5.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -422,7 +480,7 @@
         private Button BTNPreviousQuestion;
         private Panel panel2;
         private Panel PanelQustionShortcut;
-        private Button button3;
+        private Button BTNSubmit;
         private RadioButton RBQuestChoices4;
         private RadioButton RBQuestChoices3;
         private RadioButton RBQuestChoices2;
@@ -445,5 +503,9 @@
         private Label LQuestChoices4;
         private Label label6;
         private Label label1;
+        private Label label7;
+        private Label LTimer;
+        private TextBox textBox1;
+        private Panel panel5;
     }
 }
