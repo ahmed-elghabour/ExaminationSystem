@@ -47,8 +47,12 @@
             txtAddress = new TextBox();
             txtFirstName = new TextBox();
             tabExam = new TabPage();
+            label8 = new Label();
+            comboBoxExams = new ComboBox();
+            btnStartExam = new Button();
             tabControl1.SuspendLayout();
             tabEdit.SuspendLayout();
+            tabExam.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
@@ -233,12 +237,42 @@
             // 
             // tabExam
             // 
+            tabExam.Controls.Add(btnStartExam);
+            tabExam.Controls.Add(label8);
+            tabExam.Controls.Add(comboBoxExams);
             tabExam.Location = new Point(4, 29);
             tabExam.Name = "tabExam";
             tabExam.Size = new Size(768, 393);
             tabExam.TabIndex = 2;
             tabExam.Text = "Exam";
             tabExam.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(242, 127);
+            label8.Name = "label8";
+            label8.Size = new Size(115, 20);
+            label8.TabIndex = 1;
+            label8.Text = "Student Courses";
+            // 
+            // comboBoxExams
+            // 
+            comboBoxExams.FormattingEnabled = true;
+            comboBoxExams.Location = new Point(375, 124);
+            comboBoxExams.Name = "comboBoxExams";
+            comboBoxExams.Size = new Size(151, 28);
+            comboBoxExams.TabIndex = 0;
+            // 
+            // btnStartExam
+            // 
+            btnStartExam.Location = new Point(242, 207);
+            btnStartExam.Name = "btnStartExam";
+            btnStartExam.Size = new Size(284, 66);
+            btnStartExam.TabIndex = 2;
+            btnStartExam.Text = "Start Exam";
+            btnStartExam.UseVisualStyleBackColor = true;
+            btnStartExam.Click += btnStartExam_Click;
             // 
             // StudentForm
             // 
@@ -251,6 +285,8 @@
             tabControl1.ResumeLayout(false);
             tabEdit.ResumeLayout(false);
             tabEdit.PerformLayout();
+            tabExam.ResumeLayout(false);
+            tabExam.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -275,5 +311,8 @@
         private Label label7;
         private ComboBox comboBoxDepartment;
         private Button btnUpdateStudent;
+        private ComboBox comboBoxExams;
+        private Label label8;
+        private Button btnStartExam;
     }
 }

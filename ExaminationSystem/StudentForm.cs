@@ -1,6 +1,7 @@
 ﻿using ExaminationSystem.Context;
 using ExaminationSystem.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,15 +17,20 @@ namespace ExaminationSystem
 {
     public partial class StudentForm : Form
     {
-        public int ID { get; init; }
+        public int StdID { get; init; }
+        List<Course> StudentCourses;
+
         ExaminationContext Context = new();
 
         public StudentForm(int id)
         {
-            ID = id;
+            StdID = id;
             InitializeComponent();
             GetDepartmentNamesFromDataBase();
-            LoadStudentData(ID);
+            LoadStudentData(StdID);
+            GetStudentCourses(StdID);
+
+            this.FormClosing += (e, v) => Context?.Dispose();
         }
 
         private void GetDepartmentNamesFromDataBase()
@@ -73,7 +79,7 @@ namespace ExaminationSystem
         {
             try
             {
-                var Student = Context.Students?.FromSql($"exec SP_SelectStudent {ID}").AsEnumerable().FirstOrDefault();
+                var Student = Context.Students?.FromSql($"exec SP_SelectStudent {StdID}").AsEnumerable().FirstOrDefault();
                 if (Student != null)
                 {
                     Student.StdFirstName = txtFirstName.Text;
@@ -100,6 +106,57 @@ namespace ExaminationSystem
             {
                 MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
             }
+        }
+
+
+
+
+        private void GetStudentCourses(int id)
+        {
+            try
+            {
+                comboBoxExams.Items.Clear();
+                StudentCourses = Context.Courses
+                                .Where(course => course.StdCrs.Any(stdCrs => stdCrs.StdId == id))
+                                .ToList();
+
+
+                if (StudentCourses != null)
+                {
+                    foreach (var course in StudentCourses)
+                    {
+                        comboBoxExams.Items.Add(course.CourseName);
+
+                        comboBoxExams.DisplayMember = course.CourseName;
+                        comboBoxExams.ValueMember = course.CourseId.ToString();
+                    }
+                }
+                else
+                    comboBoxExams.Text = "No courses";
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
+            }
+
+
+        }
+
+         
+
+        private void btnStartExam_Click(object sender, EventArgs e)
+        {
+            var randomExam = Context.Exams
+                .Where(exam => exam.CourseId == Convert.ToInt32(comboBoxExams.SelectedValue))
+                .OrderBy(e => Guid.NewGuid()) // Order by random
+                .FirstOrDefault();
+
+            ExamForm examForm = new();
+            examForm.Show();
+            this.Hide();
+            //return;
         }
     }
 }
