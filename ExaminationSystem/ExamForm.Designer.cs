@@ -48,7 +48,7 @@
             RBQuestChoices2 = new RadioButton();
             RBQuestChoices1 = new RadioButton();
             PanelQustionShortcut = new Panel();
-            button3 = new Button();
+            BTNSubmit = new Button();
             panel4 = new Panel();
             PanelProgressBar = new Panel();
             label3 = new Label();
@@ -318,17 +318,17 @@
             PanelQustionShortcut.Size = new Size(286, 279);
             PanelQustionShortcut.TabIndex = 3;
             // 
-            // button3
+            // BTNSubmit
             // 
-            button3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button3.Cursor = Cursors.Hand;
-            button3.Location = new Point(873, 44);
-            button3.Name = "button3";
-            button3.Size = new Size(104, 31);
-            button3.TabIndex = 4;
-            button3.Text = "Submit";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
+            BTNSubmit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            BTNSubmit.Cursor = Cursors.Hand;
+            BTNSubmit.Location = new Point(873, 44);
+            BTNSubmit.Name = "BTNSubmit";
+            BTNSubmit.Size = new Size(104, 31);
+            BTNSubmit.TabIndex = 4;
+            BTNSubmit.Text = "Submit";
+            BTNSubmit.UseVisualStyleBackColor = true;
+            BTNSubmit.Click += BTNSubmit_Click;
             // 
             // panel4
             // 
@@ -450,7 +450,7 @@
             Controls.Add(LStudentName);
             Controls.Add(label3);
             Controls.Add(panel4);
-            Controls.Add(button3);
+            Controls.Add(BTNSubmit);
             Controls.Add(panel2);
             Controls.Add(BTNPreviousQuestion);
             Controls.Add(BTNNextQuestion);
@@ -480,7 +480,7 @@
         private Button BTNPreviousQuestion;
         private Panel panel2;
         private Panel PanelQustionShortcut;
-        private Button button3;
+        private Button BTNSubmit;
         private RadioButton RBQuestChoices4;
         private RadioButton RBQuestChoices3;
         private RadioButton RBQuestChoices2;

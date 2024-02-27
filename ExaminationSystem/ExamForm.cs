@@ -1,4 +1,11 @@
-﻿using System;
+﻿/**
+ * @title Exam Form
+ * @author A.Rahman Khallaf
+ * @date February 27, 2024 
+ * @description Examination System | Exam Form
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,16 +24,19 @@ namespace ExaminationSystem
 {
     public partial class ExamForm : Form
     {
-        public TimeSpan Time { get; set; }
-        int ExamID = 5;
-        int studentID = 2;
+        TimeSpan Time { get; set; }
+        public int ExamID { get; set; } = 1;
+        public int studentID { get; set; } = 1;
+
         readonly ExaminationContext Context = new();
         BindingSource QustionBS = [];
-        BindingSource AnswerBS = [];
-        int[] UserSolution;
+
+        int[] UserSolution = [];
         List<int> FlagetQustions = new();
-        int oldQustionIndex;
+        int oldQustionIndex = 0;
+
         bool flagCheckBox = false;
+
         List<List<QuestChoice>> AnswerList = [];
         public ExamForm()
         {
@@ -38,6 +48,7 @@ namespace ExaminationSystem
         {
             try
             {
+                if (!this.Visible) return;
                 if (LTimer.InvokeRequired)
                 {
                     // If we're not on the UI thread, invoke this method recursively on the UI thread
@@ -49,7 +60,7 @@ namespace ExaminationSystem
                     LTimer.Text = text;
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception) { }
         }
 
         public void counter(TimeSpan t)
@@ -270,6 +281,7 @@ namespace ExaminationSystem
 
         private void CBFlag_CheckedChanged(object sender, EventArgs e)
         {
+
             if (flagCheckBox)
             {
                 return;
@@ -292,15 +304,16 @@ namespace ExaminationSystem
             updateAnsewrs(AnswerList[QustionBS.Position]);
 
             string Answers = string.Join(",", UserSolution.Select(n => n == 0 ? "" : ((char)('A' + n - 1)).ToString())); ;
-            Trace.WriteLine(Answers);
+
             try
             {
                 var x = Context.Database.ExecuteSql($"EXEC SP_ExamAnswers @ExamID = {ExamID}, @Std_ID = {studentID}, @Answers = {Answers};");
-                Trace.WriteLine(x);
+
                 MessageBox.Show("Exam Submitted Successfully", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
+                // TODO: Display Submit Failed.
                 Trace.WriteLine(ex.Message);
                 //MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -311,12 +324,13 @@ namespace ExaminationSystem
             double progressPercentage = ((double)current / (double)total) * 100;
 
             int percentage = (int)progressPercentage;
-            // Calculate the width of the child panel based on the percentage
+            // Calculate the width of the PanelProgressBar based on the percentage
             int parentWidth = PanelProgressBar?.Parent?.Width ?? 0;
             int childWidth = (int)Math.Round(parentWidth * percentage / 100.0);
 
-            // Set the width of the child panel
-            PanelProgressBar.Width = childWidth;
+            // Set the width of the PanelProgressBar
+            if (PanelProgressBar != null)
+                PanelProgressBar.Width = childWidth;
         }
 
         private string GetCurrentAcademicYear()
@@ -348,29 +362,9 @@ namespace ExaminationSystem
             return academicYear;
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void BTNSubmit_Click(object sender, EventArgs e)
         {
             Submit();
-        }
-
-        private void ExamForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason == CloseReason.UserClosing)
-            {
-                // Display a message box asking the user if they really want to close the form
-                DialogResult result = MessageBox.Show("Are you sure you want to Submit Exam?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                // If the user clicks "No", cancel the form closing event
-                if (result == DialogResult.No)
-                {
-                    e.Cancel = true;
-                }
-                else
-                {
-                    Submit();
-                    Application.Exit();
-                }
-            }
         }
 
         private void ExamForm_SizeChanged(object sender, EventArgs e)
@@ -396,6 +390,26 @@ namespace ExaminationSystem
         private void RBQuestChoices4_CheckedChanged(object sender, EventArgs e)
         {
             //updateAnsewrs(AnswerList[QustionBS.Position]);
+        }
+
+        private void ExamForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                // Display a message box asking the user if they really want to close the form
+                DialogResult result = MessageBox.Show("Are you sure you want to Submit Exam?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                // If the user clicks "No", cancel the form closing event
+                if (result == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
+                else
+                {
+                    Submit();
+                    Application.Exit();
+                }
+            }
         }
     }
 }
