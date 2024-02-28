@@ -204,7 +204,6 @@
             CoursesBox.Name = "CoursesBox";
             CoursesBox.Size = new Size(430, 364);
             CoursesBox.TabIndex = 0;
-            CoursesBox.SelectedIndexChanged += CoursesBox_SelectedIndexChanged;
             // 
             // tabPage1
             // 
@@ -379,7 +378,6 @@
             Name = "InstructorForm";
             Text = "Instructor";
             FormClosing += InstructorForm_FormClosing;
-            Load += InstructorForm_Load;
             tabPage4.ResumeLayout(false);
             tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)MCQnum).EndInit();

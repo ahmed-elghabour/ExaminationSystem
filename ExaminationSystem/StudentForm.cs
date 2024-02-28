@@ -30,6 +30,7 @@ namespace ExaminationSystem
             GetDepartmentNamesFromDataBase();
             LoadStudentData(StdID);
             GetStudentCourses(StdID);
+            GetCourseGrade(id);
 
             this.FormClosing += (e, v) => Context?.Dispose();
         }
@@ -160,10 +161,44 @@ namespace ExaminationSystem
             this.Hide();
         }
 
+<<<<<<< HEAD
         private void StudentForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Context?.Dispose();
             Application.Exit();
+=======
+        
+
+        private void GetCourseGrade(int id)
+        {
+            try
+            {
+                var results = (from sc in Context.StdCrs
+                               join c in Context.Courses on sc.CourseId equals c.CourseId
+                               where sc.StdId == id
+                               select new
+                               {
+                                   CourseName = c.CourseName,
+                                   CoursesGrades = sc.StdGrade
+                               }).ToList();
+                if (results != null)
+                {
+                    foreach (var student in results)
+                    {
+                        coursesGradesBox.Items.Add($"{student.CourseName}");
+                        gradesBox.Items.Add($"{student.CoursesGrades}");
+                    }
+                }
+                else
+                    coursesGradesBox.Text = "No Courses";
+
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
+            }
+>>>>>>> 7ffaaa43e81d5f3d585a40b145b9297e899e9acb
         }
     }
 }

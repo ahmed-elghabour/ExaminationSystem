@@ -47,15 +47,22 @@ public partial class ExaminationContext : DbContext
     public virtual DbSet<Topic> Topics { get; set; }
 
     // Abdo
+    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //    => optionsBuilder.UseSqlServer("Data Source=ARAHMAN\\SQLEXPRESS01;Initial Catalog=Examination;Integrated Security=True; Encrypt=false");
+
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Data Source=ARAHMAN\\SQLEXPRESS01;Initial Catalog=Examination;Integrated Security=True; Encrypt=false");
+        => optionsBuilder.UseSqlServer("Data Source=VOLT\\SQLEXPRESS;Initial Catalog=Examination;Integrated Security=True; Encrypt=false");
 
 
     //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+<<<<<<< HEAD
     //    => optionsBuilder.UseSqlServer("Data Source=VOLT\\SQLEXPRESS;Initial Catalog=Examination;Integrated Security=True; Encrypt=false");
 
 
     //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+=======
+>>>>>>> 7ffaaa43e81d5f3d585a40b145b9297e899e9acb
     //    => optionsBuilder.UseSqlServer("Data Source=AhmedoElgamal;Initial Catalog=Examination;Integrated Security=True; Encrypt=false");
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
