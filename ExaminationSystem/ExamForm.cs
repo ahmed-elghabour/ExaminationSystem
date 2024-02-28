@@ -303,6 +303,10 @@ namespace ExaminationSystem
 
         private void Submit()
         {
+            if (!this.Visible)
+            {
+                return;
+            }
             updateAnsewrs(AnswerList[QustionBS.Position]);
 
             string Answers = string.Join(",", UserSolution.Select(n => n == 0 ? "" : ((char)('A' + n - 1)).ToString())); ;
@@ -318,6 +322,23 @@ namespace ExaminationSystem
                 // TODO: Display Submit Failed.
                 Trace.WriteLine(ex.Message);
                 //MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            if (next == null)
+            {
+                Application.Exit();
+            }
+            else
+            {
+                try
+                {
+                    next.Visible = true;
+                    this.Visible = false;
+                }
+                catch
+                {
+
+                }
             }
         }
 
@@ -406,19 +427,12 @@ namespace ExaminationSystem
                 {
                     e.Cancel = true;
                 }
-                else
-                {
-                    Submit();
-                    if (next == null)
-                    {
-                        Application.Exit();
-                    } else
-                    {
-                        this.Visible = false;
-                        next.Visible = true;
-                    }
-                }
             }
+        }
+
+        private void ExamForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Submit();
         }
     }
 }

@@ -459,6 +459,7 @@
             Name = "ExamForm";
             Text = "Exam Form";
             FormClosing += ExamForm_FormClosing;
+            FormClosed += ExamForm_FormClosed;
             Load += ExamForm_Load;
             SizeChanged += ExamForm_SizeChanged;
             panel1.ResumeLayout(false);
