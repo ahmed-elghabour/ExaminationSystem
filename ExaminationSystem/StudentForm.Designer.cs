@@ -47,18 +47,25 @@
             txtAddress = new TextBox();
             txtFirstName = new TextBox();
             tabExam = new TabPage();
+            btnStartExam = new Button();
             label8 = new Label();
             comboBoxExams = new ComboBox();
-            btnStartExam = new Button();
+            CoursesGrades = new TabPage();
+            gradesBox = new ListBox();
+            label10 = new Label();
+            CourseNameLBL = new Label();
+            coursesGradesBox = new ListBox();
             tabControl1.SuspendLayout();
             tabEdit.SuspendLayout();
             tabExam.SuspendLayout();
+            CoursesGrades.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
             // 
             tabControl1.Controls.Add(tabEdit);
             tabControl1.Controls.Add(tabExam);
+            tabControl1.Controls.Add(CoursesGrades);
             tabControl1.Location = new Point(12, 12);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
@@ -247,6 +254,16 @@
             tabExam.Text = "Exam";
             tabExam.UseVisualStyleBackColor = true;
             // 
+            // btnStartExam
+            // 
+            btnStartExam.Location = new Point(242, 207);
+            btnStartExam.Name = "btnStartExam";
+            btnStartExam.Size = new Size(284, 66);
+            btnStartExam.TabIndex = 2;
+            btnStartExam.Text = "Start Exam";
+            btnStartExam.UseVisualStyleBackColor = true;
+            btnStartExam.Click += btnStartExam_Click;
+            // 
             // label8
             // 
             label8.AutoSize = true;
@@ -264,15 +281,53 @@
             comboBoxExams.Size = new Size(151, 28);
             comboBoxExams.TabIndex = 0;
             // 
-            // btnStartExam
+            // CoursesGrades
             // 
-            btnStartExam.Location = new Point(242, 207);
-            btnStartExam.Name = "btnStartExam";
-            btnStartExam.Size = new Size(284, 66);
-            btnStartExam.TabIndex = 2;
-            btnStartExam.Text = "Start Exam";
-            btnStartExam.UseVisualStyleBackColor = true;
-            btnStartExam.Click += btnStartExam_Click;
+            CoursesGrades.Controls.Add(gradesBox);
+            CoursesGrades.Controls.Add(label10);
+            CoursesGrades.Controls.Add(CourseNameLBL);
+            CoursesGrades.Controls.Add(coursesGradesBox);
+            CoursesGrades.Location = new Point(4, 29);
+            CoursesGrades.Name = "CoursesGrades";
+            CoursesGrades.Padding = new Padding(3);
+            CoursesGrades.Size = new Size(768, 393);
+            CoursesGrades.TabIndex = 3;
+            CoursesGrades.Text = "Courses Grades";
+            CoursesGrades.UseVisualStyleBackColor = true;
+            // 
+            // gradesBox
+            // 
+            gradesBox.FormattingEnabled = true;
+            gradesBox.Location = new Point(351, 30);
+            gradesBox.Name = "gradesBox";
+            gradesBox.Size = new Size(251, 344);
+            gradesBox.TabIndex = 4;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(443, 7);
+            label10.Name = "label10";
+            label10.Size = new Size(49, 20);
+            label10.TabIndex = 3;
+            label10.Text = "Grade";
+            // 
+            // CourseNameLBL
+            // 
+            CourseNameLBL.AutoSize = true;
+            CourseNameLBL.Location = new Point(193, 7);
+            CourseNameLBL.Name = "CourseNameLBL";
+            CourseNameLBL.Size = new Size(54, 20);
+            CourseNameLBL.TabIndex = 1;
+            CourseNameLBL.Text = "Course";
+            // 
+            // coursesGradesBox
+            // 
+            coursesGradesBox.FormattingEnabled = true;
+            coursesGradesBox.Location = new Point(131, 30);
+            coursesGradesBox.Name = "coursesGradesBox";
+            coursesGradesBox.Size = new Size(233, 344);
+            coursesGradesBox.TabIndex = 0;
             // 
             // StudentForm
             // 
@@ -287,6 +342,8 @@
             tabEdit.PerformLayout();
             tabExam.ResumeLayout(false);
             tabExam.PerformLayout();
+            CoursesGrades.ResumeLayout(false);
+            CoursesGrades.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -314,5 +371,10 @@
         private ComboBox comboBoxExams;
         private Label label8;
         private Button btnStartExam;
+        private TabPage CoursesGrades;
+        private ListBox coursesGradesBox;
+        private Label label10;
+        private Label CourseNameLBL;
+        private ListBox gradesBox;
     }
 }

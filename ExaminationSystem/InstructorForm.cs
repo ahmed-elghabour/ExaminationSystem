@@ -173,7 +173,6 @@ namespace ExaminationSystem
                 }
                 else
                     studentsBox.Text = "No students";
-
             }
             catch (Exception ex)
             {
