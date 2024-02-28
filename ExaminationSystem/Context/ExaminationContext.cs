@@ -54,9 +54,9 @@ public partial class ExaminationContext : DbContext
     //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     //    => optionsBuilder.UseSqlServer("Data Source=VOLT\\SQLEXPRESS;Initial Catalog=Examination;Integrated Security=True; Encrypt=false");
 
-    //ghabour
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-DG6SNP3;Initial Catalog=Examination;Integrated Security=True; Encrypt=false");
+        => optionsBuilder.UseSqlServer("Data Source=AhmedoElgamal;Initial Catalog=Examination;Integrated Security=True; Encrypt=false");
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Course>(entity =>

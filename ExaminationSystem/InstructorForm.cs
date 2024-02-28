@@ -17,6 +17,7 @@ namespace ExaminationSystem
             CourseNamesFromDataBase(ID);
             LoadInstructorData(ID);
             GetInstructorCourses(ID);
+            GetInstructorStudents(ID);
         }
 
         private void LoadInstructorData(int id)
@@ -151,6 +152,44 @@ namespace ExaminationSystem
             {
                 MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
             }
+        }
+
+        private void GetInstructorStudents(int id)
+        {
+            try
+            {
+                studentsBox.Items.Clear();
+
+                var students = from s in Context.Students
+                              where s.Ins.Any(c => c.InsId == id)
+                              select s.StdFirstName + " " + s.StdLastName;
+
+                if (students != null)
+                {
+                    foreach (var student in students)
+                    {
+                        studentsBox.Items.Add(student);
+                    }
+                }
+                else
+                    studentsBox.Text = "No students";
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
+            }
+
+        }
+
+        private void InstructorForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CoursesBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
