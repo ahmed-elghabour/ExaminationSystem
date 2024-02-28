@@ -133,7 +133,7 @@ namespace ExaminationSystem
 
         }
 
-         
+
 
         private void btnStartExam_Click(object sender, EventArgs e)
         {
@@ -141,7 +141,7 @@ namespace ExaminationSystem
                 .Where(exam => exam.CourseId == Convert.ToInt32(comboBoxExams.SelectedValue))
                 .OrderBy(e => Guid.NewGuid()) // Order by random
                 .FirstOrDefault();
-            
+
             if (randomExam == null)
             {
                 MessageBox.Show(this, "No Exam Found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -156,8 +156,14 @@ namespace ExaminationSystem
 
             examForm.next = this;
             examForm.Show();
-            
+
             this.Hide();
+        }
+
+        private void StudentForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Context?.Dispose();
+            Application.Exit();
         }
     }
 }

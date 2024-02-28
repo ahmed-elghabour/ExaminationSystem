@@ -457,6 +457,7 @@
             Controls.Add(panel1);
             MinimumSize = new Size(1000, 550);
             Name = "ExamForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Exam Form";
             FormClosing += ExamForm_FormClosing;
             FormClosed += ExamForm_FormClosed;

@@ -27,6 +27,9 @@ namespace ExaminationSystem
         TimeSpan Time { get; set; }
         public int ExamID { get; set; } = 1;
         public int studentID { get; set; } = 1;
+        bool timeOut = false;
+        bool submit = false;
+        int courseID;
         public Form next { get; set; } = null;
 
         readonly ExaminationContext Context = new();
@@ -43,7 +46,7 @@ namespace ExaminationSystem
         {
             InitializeComponent();
 
-            this.FormClosed += (e, v) => Context?.Dispose();
+            //this.FormClosed += (e, v) => Context?.Dispose();
         }
         void UpdateLTimerText(string text)
         {
@@ -77,7 +80,9 @@ namespace ExaminationSystem
 
                 t = t.Subtract(TimeSpan.FromSeconds(1));
             }
+            timeOut = true;
             Submit();
+
         }
 
         private void ExamForm_Load(object sender, EventArgs e)
@@ -91,7 +96,7 @@ namespace ExaminationSystem
             Time = TimeSpan.FromMinutes(exam?.Duration ?? 0);
             //Time = TimeSpan.FromMinutes(0.5);
             // Update Subject
-            int courseID = exam.CourseId ?? -1;
+            courseID = exam.CourseId ?? -1;
             if (courseID > 0)
             {
                 string subject = Context.Courses.FirstOrDefault(c => c.CourseId == courseID).CourseName ?? String.Empty;
@@ -303,19 +308,34 @@ namespace ExaminationSystem
 
         private void Submit()
         {
-            if (!this.Visible)
+            if (submit)
             {
                 return;
             }
+            submit = true;
             updateAnsewrs(AnswerList[QustionBS.Position]);
 
             string Answers = string.Join(",", UserSolution.Select(n => n == 0 ? "" : ((char)('A' + n - 1)).ToString())); ;
 
             try
             {
-                var x = Context.Database.ExecuteSql($"EXEC SP_ExamAnswers @ExamID = {ExamID}, @Std_ID = {studentID}, @Answers = {Answers};");
+                var savedQustions = Context?.Database?.ExecuteSql($"EXEC SP_ExamAnswers @ExamID = {ExamID}, @Std_ID = {studentID}, @Answers = {Answers};");
+
+                var studentCourse = Context?.StdCrs?.FirstOrDefault(sc => sc.StdId == studentID && sc.CourseId == courseID);
+
+                if (studentCourse != null)
+                {
+                    // Remove the student course record from the DbSet
+                    Context?.StdCrs?.Remove(studentCourse);
+
+                    // Save changes to the database
+                    Context?.SaveChanges();
+                }
+
+                var result = Context?.Database.ExecuteSql($"EXEC SP_ExamCorrection @ExamID = {ExamID}, @Std_ID = {studentID};");
 
                 MessageBox.Show("Exam Submitted Successfully", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //Context?.Dispose();
             }
             catch (Exception ex)
             {
@@ -323,22 +343,9 @@ namespace ExaminationSystem
                 Trace.WriteLine(ex.Message);
                 //MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            if (next == null)
+            if (timeOut)
             {
-                Application.Exit();
-            }
-            else
-            {
-                try
-                {
-                    next.Visible = true;
-                    this.Visible = false;
-                }
-                catch
-                {
-
-                }
+                this.Close();
             }
         }
 
@@ -387,7 +394,10 @@ namespace ExaminationSystem
 
         private void BTNSubmit_Click(object sender, EventArgs e)
         {
-            Submit();
+            //Submit();
+            //Application.Exit();
+            this.Close();
+
         }
 
         private void ExamForm_SizeChanged(object sender, EventArgs e)
@@ -417,6 +427,21 @@ namespace ExaminationSystem
 
         private void ExamForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (timeOut)
+            {
+                if (next == null)
+                {
+                    Application.Exit();
+                }
+                else
+                {
+                    //Submit();
+                    //Context?.Dispose();
+                    next.Visible = true;
+                    this.Visible = false;
+                }
+            }
+            else
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 // Display a message box asking the user if they really want to close the form
@@ -427,12 +452,26 @@ namespace ExaminationSystem
                 {
                     e.Cancel = true;
                 }
+                else
+                {
+                    if (next == null)
+                    {
+                        Application.Exit();
+                    }
+                    else
+                    {
+                        Submit();
+                        //Context?.Dispose();
+                        next.Visible = true;
+                        this.Visible = false;
+                    }
+                }
             }
         }
 
         private void ExamForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Submit();
+            Context?.Dispose();
         }
     }
 }
