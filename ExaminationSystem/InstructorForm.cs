@@ -22,7 +22,6 @@ namespace ExaminationSystem
 
         private void LoadInstructorData(int id)
         {
-            //Trace.WriteLine($"Ins ID: {ID}");
             try
             {
                 var InstructorData = Context.Instructors.FromSql($"exec SP_SelectInstructor {id}").ToList();
@@ -134,6 +133,7 @@ namespace ExaminationSystem
         private void InstructorForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+            Context?.Dispose();
         }
 
         private void createBtn_Click(object sender, EventArgs e)
@@ -178,16 +178,6 @@ namespace ExaminationSystem
             {
                 MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
             }
-
-        }
-
-        private void InstructorForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CoursesBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
         }
     }
