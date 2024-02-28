@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -120,21 +121,9 @@ namespace ExaminationSystem
                                 .Where(course => course.StdCrs.Any(stdCrs => stdCrs.StdId == id))
                                 .ToList();
 
-
-                if (StudentCourses != null)
-                {
-                    foreach (var course in StudentCourses)
-                    {
-                        comboBoxExams.Items.Add(course.CourseName);
-
-                        comboBoxExams.DisplayMember = course.CourseName;
-                        comboBoxExams.ValueMember = course.CourseId.ToString();
-                    }
-                }
-                else
-                    comboBoxExams.Text = "No courses";
-
-
+                comboBoxExams.DataSource = StudentCourses;
+                comboBoxExams.DisplayMember = "CourseName";
+                comboBoxExams.ValueMember = "CourseId";
             }
             catch (Exception ex)
             {
@@ -152,11 +141,23 @@ namespace ExaminationSystem
                 .Where(exam => exam.CourseId == Convert.ToInt32(comboBoxExams.SelectedValue))
                 .OrderBy(e => Guid.NewGuid()) // Order by random
                 .FirstOrDefault();
-
+            
+            if (randomExam == null)
+            {
+                MessageBox.Show(this, "No Exam Found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             ExamForm examForm = new();
+
+            examForm.ExamID = randomExam.ExamId;
+            examForm.studentID = StdID;
+
+            Trace.WriteLine(Convert.ToInt32(comboBoxExams.SelectedValue) + " aaasasasa");
+
+            examForm.next = this;
             examForm.Show();
+            
             this.Hide();
-            //return;
         }
     }
 }

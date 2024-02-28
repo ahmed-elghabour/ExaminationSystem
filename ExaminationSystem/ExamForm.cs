@@ -27,6 +27,7 @@ namespace ExaminationSystem
         TimeSpan Time { get; set; }
         public int ExamID { get; set; } = 1;
         public int studentID { get; set; } = 1;
+        public Form next { get; set; } = null;
 
         readonly ExaminationContext Context = new();
         BindingSource QustionBS = [];
@@ -81,6 +82,7 @@ namespace ExaminationSystem
 
         private void ExamForm_Load(object sender, EventArgs e)
         {
+
             List<Question> QuestionsList;
 
             LAcademicYear.Text = GetCurrentAcademicYear();
@@ -407,7 +409,14 @@ namespace ExaminationSystem
                 else
                 {
                     Submit();
-                    Application.Exit();
+                    if (next == null)
+                    {
+                        Application.Exit();
+                    } else
+                    {
+                        this.Visible = false;
+                        next.Visible = true;
+                    }
                 }
             }
         }
