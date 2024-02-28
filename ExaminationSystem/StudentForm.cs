@@ -161,13 +161,11 @@ namespace ExaminationSystem
             this.Hide();
         }
 
-<<<<<<< HEAD
         private void StudentForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Context?.Dispose();
             Application.Exit();
-=======
-        
+        }
 
         private void GetCourseGrade(int id)
         {
@@ -194,11 +192,10 @@ namespace ExaminationSystem
 
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
             }
->>>>>>> 7ffaaa43e81d5f3d585a40b145b9297e899e9acb
         }
     }
 }

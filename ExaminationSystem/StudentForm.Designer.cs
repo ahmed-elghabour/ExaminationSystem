@@ -50,14 +50,11 @@
             btnStartExam = new Button();
             label8 = new Label();
             comboBoxExams = new ComboBox();
-<<<<<<< HEAD
-=======
             CoursesGrades = new TabPage();
             gradesBox = new ListBox();
             label10 = new Label();
             CourseNameLBL = new Label();
             coursesGradesBox = new ListBox();
->>>>>>> 7ffaaa43e81d5f3d585a40b145b9297e899e9acb
             tabControl1.SuspendLayout();
             tabEdit.SuspendLayout();
             tabExam.SuspendLayout();
@@ -68,13 +65,10 @@
             // 
             tabControl1.Controls.Add(tabEdit);
             tabControl1.Controls.Add(tabExam);
-<<<<<<< HEAD
             tabControl1.Location = new Point(10, 9);
             tabControl1.Margin = new Padding(3, 2, 3, 2);
-=======
             tabControl1.Controls.Add(CoursesGrades);
             tabControl1.Location = new Point(12, 12);
->>>>>>> 7ffaaa43e81d5f3d585a40b145b9297e899e9acb
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(679, 320);
@@ -274,16 +268,13 @@
             // 
             // btnStartExam
             // 
-<<<<<<< HEAD
             btnStartExam.Location = new Point(212, 155);
             btnStartExam.Margin = new Padding(3, 2, 3, 2);
             btnStartExam.Name = "btnStartExam";
             btnStartExam.Size = new Size(248, 50);
-=======
             btnStartExam.Location = new Point(242, 207);
             btnStartExam.Name = "btnStartExam";
             btnStartExam.Size = new Size(284, 66);
->>>>>>> 7ffaaa43e81d5f3d585a40b145b9297e899e9acb
             btnStartExam.TabIndex = 2;
             btnStartExam.Text = "Start Exam";
             btnStartExam.UseVisualStyleBackColor = true;
@@ -307,8 +298,6 @@
             comboBoxExams.Size = new Size(133, 23);
             comboBoxExams.TabIndex = 0;
             // 
-<<<<<<< HEAD
-=======
             // CoursesGrades
             // 
             CoursesGrades.Controls.Add(gradesBox);
@@ -357,7 +346,6 @@
             coursesGradesBox.Size = new Size(233, 344);
             coursesGradesBox.TabIndex = 0;
             // 
->>>>>>> 7ffaaa43e81d5f3d585a40b145b9297e899e9acb
             // StudentForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
