@@ -320,16 +320,16 @@ namespace ExaminationSystem
             {
                 var savedQustions = Context?.Database?.ExecuteSql($"EXEC SP_ExamAnswers @ExamID = {ExamID}, @Std_ID = {studentID}, @Answers = {Answers};");
 
-                var studentCourse = Context?.StdCrs?.FirstOrDefault(sc => sc.StdId == studentID && sc.CourseId == courseID);
+                // var studentCourse = Context?.StdCrs?.FirstOrDefault(sc => sc.StdId == studentID && sc.CourseId == courseID);
 
-                if (studentCourse != null)
-                {
-                    // Remove the student course record from the DbSet
-                    Context?.StdCrs?.Remove(studentCourse);
+                // if (studentCourse != null)
+                // {
+                //    // Remove the student course record from the DbSet
+                //    Context?.StdCrs?.Remove(studentCourse);
 
-                    // Save changes to the database
-                    Context?.SaveChanges();
-                }
+                //    // Save changes to the database
+                //    Context?.SaveChanges();
+                // }
 
                 var result = Context?.Database.ExecuteSql($"EXEC SP_ExamCorrection @ExamID = {ExamID}, @Std_ID = {studentID};");
 
