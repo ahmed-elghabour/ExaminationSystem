@@ -197,5 +197,12 @@ namespace ExaminationSystem
                 MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LoginForm logForm = new();
+            logForm.Show();
+            this.Hide();
+        }
     }
 }
