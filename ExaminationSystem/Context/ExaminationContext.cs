@@ -46,11 +46,11 @@ public partial class ExaminationContext : DbContext
 
     public virtual DbSet<Topic> Topics { get; set; }
 
-    //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //        => optionsBuilder.UseSqlServer("Data Source=VOLT\\SQLEXPRESS;Initial Catalog=Examination;Integrated Security=True;Encrypt=True;Encrypt=false");
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Data Source=ARAHMAN\\SQLEXPRESS01;Initial Catalog=Examination;Integrated Security=True; Encrypt=false");
+        => optionsBuilder.UseSqlServer("Data Source=VOLT\\SQLEXPRESS;Initial Catalog=Examination;Integrated Security=True;Encrypt=True;Encrypt=false");
+
+    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //    => optionsBuilder.UseSqlServer("Data Source=ARAHMAN\\SQLEXPRESS01;Initial Catalog=Examination;Integrated Security=True; Encrypt=false");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

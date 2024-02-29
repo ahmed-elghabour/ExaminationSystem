@@ -206,16 +206,16 @@ namespace ExaminationSystem
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            load_coures_data();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
         {
             LoginForm logForm = new();
             logForm.Show();
             this.Hide();
-        }
-
-        private void tabControl1_Selected(object sender, TabControlEventArgs e)
-        {
-            load_coures_data();
         }
     }
 }

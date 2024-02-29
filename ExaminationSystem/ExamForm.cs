@@ -1,11 +1,4 @@
-﻿/**
- * @title Exam Form
- * @author A.Rahman Khallaf
- * @date February 27, 2024 
- * @description Examination System | Exam Form
- */
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
