@@ -11,7 +11,7 @@ public partial class StdCr
 
     public int CourseId { get; set; }
 
-    public int? StdGrade { get; set; }
+    public double? StdGrade { get; set; }
 
     public virtual Course Course { get; set; }
 
