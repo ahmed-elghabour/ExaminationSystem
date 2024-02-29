@@ -19,6 +19,7 @@ namespace ExaminationSystem
     public partial class StudentForm : Form
     {
         public int StdID { get; init; }
+
         List<Course> StudentCourses;
 
         ExaminationContext Context = new();
@@ -30,7 +31,7 @@ namespace ExaminationSystem
             GetDepartmentNamesFromDataBase();
             LoadStudentData(StdID);
             GetStudentCourses(StdID);
-            GetCourseGrade(id);
+            //GetCourseGrade(id);
 
             this.FormClosing += (e, v) => Context?.Dispose();
         }
@@ -167,13 +168,20 @@ namespace ExaminationSystem
             Application.Exit();
         }
 
-        private void GetCourseGrade(int id)
+        private void GetCourseGrade()
         {
+
+        }
+
+        void load_coures_data()
+        {
+            coursesGradesBox.Items.Clear();
+            gradesBox.Items.Clear();
             try
             {
                 var results = (from sc in Context.StdCrs
                                join c in Context.Courses on sc.CourseId equals c.CourseId
-                               where sc.StdId == id
+                               where sc.StdId == StdID
                                select new
                                {
                                    c.CourseName,
@@ -203,6 +211,11 @@ namespace ExaminationSystem
             LoginForm logForm = new();
             logForm.Show();
             this.Hide();
+        }
+
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            load_coures_data();
         }
     }
 }
