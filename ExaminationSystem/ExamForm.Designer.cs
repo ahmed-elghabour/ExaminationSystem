@@ -39,9 +39,10 @@
             BTNPreviousQuestion = new Button();
             panel2 = new Panel();
             LQuestChoices4 = new Label();
+            LQuestChoices3 = new Label();
             label6 = new Label();
             label1 = new Label();
-            LQuestChoices3 = new Label();
+            panel6 = new Panel();
             TBQustionHeader = new TextBox();
             RBQuestChoices4 = new RadioButton();
             RBQuestChoices3 = new RadioButton();
@@ -186,9 +187,10 @@
             panel2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel2.BackColor = Color.WhiteSmoke;
             panel2.Controls.Add(LQuestChoices4);
+            panel2.Controls.Add(LQuestChoices3);
             panel2.Controls.Add(label6);
             panel2.Controls.Add(label1);
-            panel2.Controls.Add(LQuestChoices3);
+            panel2.Controls.Add(panel6);
             panel2.Controls.Add(TBQustionHeader);
             panel2.Controls.Add(RBQuestChoices4);
             panel2.Controls.Add(RBQuestChoices3);
@@ -202,19 +204,29 @@
             // LQuestChoices4
             // 
             LQuestChoices4.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            LQuestChoices4.Location = new Point(19, 220);
+            LQuestChoices4.Location = new Point(6, 220);
             LQuestChoices4.Name = "LQuestChoices4";
-            LQuestChoices4.Size = new Size(32, 36);
+            LQuestChoices4.Size = new Size(42, 36);
             LQuestChoices4.TabIndex = 12;
             LQuestChoices4.Text = "D-";
             LQuestChoices4.TextAlign = ContentAlignment.MiddleRight;
             // 
+            // LQuestChoices3
+            // 
+            LQuestChoices3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            LQuestChoices3.Location = new Point(6, 180);
+            LQuestChoices3.Name = "LQuestChoices3";
+            LQuestChoices3.Size = new Size(42, 36);
+            LQuestChoices3.TabIndex = 9;
+            LQuestChoices3.Text = "C-";
+            LQuestChoices3.TextAlign = ContentAlignment.MiddleRight;
+            // 
             // label6
             // 
             label6.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.Location = new Point(25, 135);
+            label6.Location = new Point(6, 135);
             label6.Name = "label6";
-            label6.Size = new Size(26, 36);
+            label6.Size = new Size(42, 36);
             label6.TabIndex = 11;
             label6.Text = "B-";
             label6.TextAlign = ContentAlignment.MiddleRight;
@@ -222,22 +234,20 @@
             // label1
             // 
             label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(19, 87);
+            label1.Location = new Point(6, 88);
             label1.Name = "label1";
-            label1.Size = new Size(32, 36);
+            label1.Size = new Size(42, 35);
             label1.TabIndex = 10;
             label1.Text = "A-";
             label1.TextAlign = ContentAlignment.MiddleRight;
             // 
-            // LQuestChoices3
+            // panel6
             // 
-            LQuestChoices3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            LQuestChoices3.Location = new Point(25, 180);
-            LQuestChoices3.Name = "LQuestChoices3";
-            LQuestChoices3.Size = new Size(26, 36);
-            LQuestChoices3.TabIndex = 9;
-            LQuestChoices3.Text = "C-";
-            LQuestChoices3.TextAlign = ContentAlignment.MiddleRight;
+            panel6.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            panel6.Location = new Point(3, 87);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(45, 171);
+            panel6.TabIndex = 13;
             // 
             // TBQustionHeader
             // 
@@ -509,5 +519,6 @@
         private Label LTimer;
         private TextBox textBox1;
         private Panel panel5;
+        private Panel panel6;
     }
 }
