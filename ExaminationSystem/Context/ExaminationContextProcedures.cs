@@ -56,7 +56,7 @@ namespace ExaminationSystem.Context
                 SqlDbType = System.Data.SqlDbType.Int,
             };
 
-            var sqlParameters = new[]
+            var sqlParameters = new []
             {
                 new SqlParameter
                 {
@@ -82,7 +82,7 @@ namespace ExaminationSystem.Context
                 SqlDbType = System.Data.SqlDbType.Int,
             };
 
-            var sqlParameters = new[]
+            var sqlParameters = new []
             {
                 new SqlParameter
                 {
@@ -108,7 +108,7 @@ namespace ExaminationSystem.Context
                 SqlDbType = System.Data.SqlDbType.Int,
             };
 
-            var sqlParameters = new[]
+            var sqlParameters = new []
             {
                 new SqlParameter
                 {
@@ -125,6 +125,7 @@ namespace ExaminationSystem.Context
                 new SqlParameter
                 {
                     ParameterName = "Answers",
+                    Size = -1,
                     Value = Answers ?? Convert.DBNull,
                     SqlDbType = System.Data.SqlDbType.VarChar,
                 },
@@ -146,7 +147,7 @@ namespace ExaminationSystem.Context
                 SqlDbType = System.Data.SqlDbType.Int,
             };
 
-            var sqlParameters = new[]
+            var sqlParameters = new []
             {
                 new SqlParameter
                 {
@@ -178,7 +179,7 @@ namespace ExaminationSystem.Context
                 SqlDbType = System.Data.SqlDbType.Int,
             };
 
-            var sqlParameters = new[]
+            var sqlParameters = new []
             {
                 new SqlParameter
                 {
@@ -223,7 +224,7 @@ namespace ExaminationSystem.Context
                 SqlDbType = System.Data.SqlDbType.Int,
             };
 
-            var sqlParameters = new[]
+            var sqlParameters = new []
             {
                 new SqlParameter
                 {
@@ -275,7 +276,7 @@ namespace ExaminationSystem.Context
                 SqlDbType = System.Data.SqlDbType.Int,
             };
 
-            var sqlParameters = new[]
+            var sqlParameters = new []
             {
                 new SqlParameter
                 {

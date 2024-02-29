@@ -7,7 +7,7 @@
    "IncludeConnectionString": true,
    "ModelNamespace": "Entities",
    "OutputContextPath": "Context",
-   "OutputPath": "Models",
+   "OutputPath": "Entities",
    "PreserveCasingWithRegex": true,
    "ProjectRootNamespace": "ExaminationSystem",
    "Schemas": null,

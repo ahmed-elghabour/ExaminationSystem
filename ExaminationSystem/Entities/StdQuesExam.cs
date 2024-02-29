@@ -11,9 +11,9 @@ public partial class StdQuesExam
 
     public string StdAnswer { get; set; }
 
-    public int? ExamId { get; set; }
+    public int ExamId { get; set; }
 
-    public int? StdId { get; set; }
+    public int StdId { get; set; }
 
     public virtual Exam Exam { get; set; }
 
