@@ -192,7 +192,7 @@ namespace ExaminationSystem
                     foreach (var student in results)
                     {
                         coursesGradesBox.Items.Add($"{student.CourseName}");
-                        gradesBox.Items.Add($"{student.CoursesGrades}");
+                        gradesBox.Items.Add($"{student.CoursesGrades} %");
                     }
                 }
                 else

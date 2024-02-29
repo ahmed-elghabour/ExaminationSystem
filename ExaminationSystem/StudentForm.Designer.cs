@@ -28,10 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StudentForm));
             tabControl1 = new TabControl();
             tabEdit = new TabPage();
-            button1 = new Button();
             btnUpdateStudent = new Button();
             label7 = new Label();
             comboBoxDepartment = new ComboBox();
@@ -56,6 +54,8 @@
             label10 = new Label();
             CourseNameLBL = new Label();
             coursesGradesBox = new ListBox();
+            button1 = new Button();
+            panel1 = new Panel();
             tabControl1.SuspendLayout();
             tabEdit.SuspendLayout();
             tabExam.SuspendLayout();
@@ -64,22 +64,22 @@
             // 
             // tabControl1
             // 
+            tabControl1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tabControl1.Controls.Add(tabEdit);
             tabControl1.Controls.Add(tabExam);
             tabControl1.Controls.Add(CoursesGrades);
-            tabControl1.Location = new Point(12, 12);
+            tabControl1.Location = new Point(12, 39);
             tabControl1.Margin = new Padding(3, 2, 3, 2);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(679, 320);
+            tabControl1.Size = new Size(679, 256);
             tabControl1.TabIndex = 0;
             tabControl1.Selected += tabControl1_Selected;
             // 
             // tabEdit
             // 
-            tabEdit.BackgroundImage = (Image)resources.GetObject("tabEdit.BackgroundImage");
+            tabEdit.BackColor = Color.White;
             tabEdit.BackgroundImageLayout = ImageLayout.Stretch;
-            tabEdit.Controls.Add(button1);
             tabEdit.Controls.Add(btnUpdateStudent);
             tabEdit.Controls.Add(label7);
             tabEdit.Controls.Add(comboBoxDepartment);
@@ -100,35 +100,18 @@
             tabEdit.Margin = new Padding(3, 2, 3, 2);
             tabEdit.Name = "tabEdit";
             tabEdit.Padding = new Padding(3, 2, 3, 2);
-            tabEdit.Size = new Size(671, 292);
+            tabEdit.Size = new Size(671, 228);
             tabEdit.TabIndex = 1;
             tabEdit.Text = "Edit";
-            tabEdit.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            button1.BackColor = Color.DeepSkyBlue;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(5, 250);
-            button1.Margin = new Padding(3, 2, 3, 2);
-            button1.Name = "button1";
-            button1.Size = new Size(185, 43);
-            button1.TabIndex = 15;
-            button1.Text = "Signout";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
             // 
             // btnUpdateStudent
             // 
-            btnUpdateStudent.BackColor = Color.DeepSkyBlue;
+            btnUpdateStudent.BackColor = Color.FromArgb(49, 123, 209);
             btnUpdateStudent.FlatAppearance.BorderSize = 0;
             btnUpdateStudent.FlatStyle = FlatStyle.Flat;
             btnUpdateStudent.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnUpdateStudent.ForeColor = Color.White;
-            btnUpdateStudent.Location = new Point(443, 185);
+            btnUpdateStudent.Location = new Point(445, 136);
             btnUpdateStudent.Margin = new Padding(3, 2, 3, 2);
             btnUpdateStudent.Name = "btnUpdateStudent";
             btnUpdateStudent.Size = new Size(185, 43);
@@ -140,8 +123,8 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.ForeColor = SystemColors.ButtonHighlight;
-            label7.Location = new Point(360, 149);
+            label7.ForeColor = Color.Black;
+            label7.Location = new Point(362, 100);
             label7.Name = "label7";
             label7.Size = new Size(70, 15);
             label7.TabIndex = 13;
@@ -150,7 +133,7 @@
             // comboBoxDepartment
             // 
             comboBoxDepartment.FormattingEnabled = true;
-            comboBoxDepartment.Location = new Point(443, 147);
+            comboBoxDepartment.Location = new Point(445, 98);
             comboBoxDepartment.Margin = new Padding(3, 2, 3, 2);
             comboBoxDepartment.Name = "comboBoxDepartment";
             comboBoxDepartment.Size = new Size(185, 23);
@@ -159,8 +142,8 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.ForeColor = SystemColors.ButtonHighlight;
-            label6.Location = new Point(394, 110);
+            label6.ForeColor = Color.Black;
+            label6.Location = new Point(396, 61);
             label6.Name = "label6";
             label6.Size = new Size(41, 15);
             label6.TabIndex = 11;
@@ -168,7 +151,7 @@
             // 
             // txtPhoneNumber
             // 
-            txtPhoneNumber.Location = new Point(443, 110);
+            txtPhoneNumber.Location = new Point(445, 61);
             txtPhoneNumber.Margin = new Padding(3, 2, 3, 2);
             txtPhoneNumber.Name = "txtPhoneNumber";
             txtPhoneNumber.Size = new Size(185, 23);
@@ -178,7 +161,7 @@
             // 
             dateTimeBirthDate.CustomFormat = "";
             dateTimeBirthDate.Format = DateTimePickerFormat.Short;
-            dateTimeBirthDate.Location = new Point(443, 72);
+            dateTimeBirthDate.Location = new Point(445, 23);
             dateTimeBirthDate.Margin = new Padding(3, 2, 3, 2);
             dateTimeBirthDate.MaxDate = new DateTime(2010, 1, 1, 0, 0, 0, 0);
             dateTimeBirthDate.MinDate = new DateTime(1980, 1, 1, 0, 0, 0, 0);
@@ -190,8 +173,8 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.ForeColor = SystemColors.ButtonHighlight;
-            label5.Location = new Point(369, 72);
+            label5.ForeColor = Color.Black;
+            label5.Location = new Point(371, 23);
             label5.Name = "label5";
             label5.Size = new Size(59, 15);
             label5.TabIndex = 8;
@@ -200,8 +183,8 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.ForeColor = SystemColors.ButtonHighlight;
-            label4.Location = new Point(47, 209);
+            label4.ForeColor = Color.Black;
+            label4.Location = new Point(49, 160);
             label4.Name = "label4";
             label4.Size = new Size(45, 15);
             label4.TabIndex = 7;
@@ -209,9 +192,10 @@
             // 
             // comboBoxGender
             // 
+            comboBoxGender.ForeColor = Color.Black;
             comboBoxGender.FormattingEnabled = true;
             comboBoxGender.Items.AddRange(new object[] { "Male", "Female" });
-            comboBoxGender.Location = new Point(102, 208);
+            comboBoxGender.Location = new Point(104, 159);
             comboBoxGender.Margin = new Padding(3, 2, 3, 2);
             comboBoxGender.Name = "comboBoxGender";
             comboBoxGender.Size = new Size(185, 23);
@@ -220,8 +204,8 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.ForeColor = SystemColors.ButtonHighlight;
-            label3.Location = new Point(43, 165);
+            label3.ForeColor = Color.Black;
+            label3.Location = new Point(45, 116);
             label3.Name = "label3";
             label3.Size = new Size(49, 15);
             label3.TabIndex = 5;
@@ -230,8 +214,8 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.ForeColor = SystemColors.ButtonHighlight;
-            label2.Location = new Point(28, 121);
+            label2.ForeColor = Color.Black;
+            label2.Location = new Point(30, 72);
             label2.Name = "label2";
             label2.Size = new Size(63, 15);
             label2.TabIndex = 4;
@@ -240,8 +224,8 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(27, 76);
+            label1.ForeColor = Color.Black;
+            label1.Location = new Point(29, 27);
             label1.Name = "label1";
             label1.Size = new Size(64, 15);
             label1.TabIndex = 3;
@@ -249,7 +233,8 @@
             // 
             // txtLastName
             // 
-            txtLastName.Location = new Point(102, 118);
+            txtLastName.ForeColor = Color.Black;
+            txtLastName.Location = new Point(104, 69);
             txtLastName.Margin = new Padding(3, 2, 3, 2);
             txtLastName.Name = "txtLastName";
             txtLastName.Size = new Size(185, 23);
@@ -257,7 +242,8 @@
             // 
             // txtAddress
             // 
-            txtAddress.Location = new Point(102, 164);
+            txtAddress.ForeColor = Color.Black;
+            txtAddress.Location = new Point(104, 115);
             txtAddress.Margin = new Padding(3, 2, 3, 2);
             txtAddress.Name = "txtAddress";
             txtAddress.Size = new Size(185, 23);
@@ -265,7 +251,8 @@
             // 
             // txtFirstName
             // 
-            txtFirstName.Location = new Point(102, 74);
+            txtFirstName.ForeColor = Color.Black;
+            txtFirstName.Location = new Point(104, 25);
             txtFirstName.Margin = new Padding(3, 2, 3, 2);
             txtFirstName.Name = "txtFirstName";
             txtFirstName.Size = new Size(185, 23);
@@ -279,26 +266,31 @@
             tabExam.Location = new Point(4, 24);
             tabExam.Margin = new Padding(3, 2, 3, 2);
             tabExam.Name = "tabExam";
-            tabExam.Size = new Size(671, 292);
+            tabExam.Size = new Size(671, 228);
             tabExam.TabIndex = 2;
             tabExam.Text = "Exam";
             tabExam.UseVisualStyleBackColor = true;
             // 
             // btnStartExam
             // 
-            btnStartExam.Location = new Point(242, 207);
+            btnStartExam.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            btnStartExam.BackColor = Color.FromArgb(49, 123, 209);
+            btnStartExam.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnStartExam.ForeColor = Color.White;
+            btnStartExam.Location = new Point(203, 144);
             btnStartExam.Margin = new Padding(3, 2, 3, 2);
             btnStartExam.Name = "btnStartExam";
             btnStartExam.Size = new Size(284, 66);
             btnStartExam.TabIndex = 2;
             btnStartExam.Text = "Start Exam";
-            btnStartExam.UseVisualStyleBackColor = true;
+            btnStartExam.UseVisualStyleBackColor = false;
             btnStartExam.Click += btnStartExam_Click;
             // 
             // label8
             // 
+            label8.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label8.AutoSize = true;
-            label8.Location = new Point(212, 95);
+            label8.Location = new Point(212, 96);
             label8.Name = "label8";
             label8.Size = new Size(93, 15);
             label8.TabIndex = 1;
@@ -306,6 +298,7 @@
             // 
             // comboBoxExams
             // 
+            comboBoxExams.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             comboBoxExams.FormattingEnabled = true;
             comboBoxExams.Location = new Point(328, 93);
             comboBoxExams.Margin = new Padding(3, 2, 3, 2);
@@ -321,53 +314,81 @@
             CoursesGrades.Controls.Add(coursesGradesBox);
             CoursesGrades.Location = new Point(4, 24);
             CoursesGrades.Name = "CoursesGrades";
-            CoursesGrades.Padding = new Padding(3, 3, 3, 3);
-            CoursesGrades.Size = new Size(671, 292);
+            CoursesGrades.Padding = new Padding(3);
+            CoursesGrades.Size = new Size(671, 228);
             CoursesGrades.TabIndex = 3;
             CoursesGrades.Text = "Courses Grades";
             CoursesGrades.UseVisualStyleBackColor = true;
             // 
             // gradesBox
             // 
+            gradesBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             gradesBox.FormattingEnabled = true;
             gradesBox.ItemHeight = 15;
-            gradesBox.Location = new Point(351, 30);
+            gradesBox.Location = new Point(342, 32);
             gradesBox.Name = "gradesBox";
-            gradesBox.Size = new Size(251, 334);
+            gradesBox.Size = new Size(251, 229);
             gradesBox.TabIndex = 4;
             // 
             // label10
             // 
-            label10.AutoSize = true;
-            label10.Location = new Point(443, 7);
+            label10.Location = new Point(448, 9);
             label10.Name = "label10";
-            label10.Size = new Size(38, 15);
+            label10.Size = new Size(38, 20);
             label10.TabIndex = 3;
             label10.Text = "Grade";
             // 
             // CourseNameLBL
             // 
-            CourseNameLBL.AutoSize = true;
-            CourseNameLBL.Location = new Point(193, 7);
+            CourseNameLBL.Location = new Point(195, 8);
             CourseNameLBL.Name = "CourseNameLBL";
-            CourseNameLBL.Size = new Size(44, 15);
+            CourseNameLBL.Size = new Size(44, 22);
             CourseNameLBL.TabIndex = 1;
             CourseNameLBL.Text = "Course";
             // 
             // coursesGradesBox
             // 
+            coursesGradesBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             coursesGradesBox.FormattingEnabled = true;
             coursesGradesBox.ItemHeight = 15;
-            coursesGradesBox.Location = new Point(131, 30);
+            coursesGradesBox.Location = new Point(101, 32);
             coursesGradesBox.Name = "coursesGradesBox";
-            coursesGradesBox.Size = new Size(233, 334);
+            coursesGradesBox.Size = new Size(233, 229);
             coursesGradesBox.TabIndex = 0;
+            // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            button1.BackColor = Color.FromArgb(49, 123, 209);
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(569, 301);
+            button1.Margin = new Padding(3, 2, 3, 2);
+            button1.Name = "button1";
+            button1.Size = new Size(118, 26);
+            button1.TabIndex = 16;
+            button1.Text = "Signout";
+            button1.UseVisualStyleBackColor = false;
+            // 
+            // panel1
+            // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            panel1.BackColor = Color.FromArgb(49, 123, 209);
+            panel1.Location = new Point(-19, -11);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(723, 45);
+            panel1.TabIndex = 17;
             // 
             // StudentForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             ClientSize = new Size(700, 338);
+            Controls.Add(panel1);
+            Controls.Add(button1);
             Controls.Add(tabControl1);
             Margin = new Padding(3, 2, 3, 2);
             Name = "StudentForm";
@@ -380,7 +401,6 @@
             tabExam.ResumeLayout(false);
             tabExam.PerformLayout();
             CoursesGrades.ResumeLayout(false);
-            CoursesGrades.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -414,5 +434,6 @@
         private Label CourseNameLBL;
         private ListBox gradesBox;
         private Button button1;
+        private Panel panel1;
     }
 }

@@ -29,22 +29,30 @@ namespace ExaminationSystem
             //Dispose Context on Form Closing
             this.FormClosing += (e, v) => context?.Dispose();
         }
-
-        private void BtnLogin_Click(object sender, EventArgs e)
-        {   // watting msg
+        async void login()
+        {
+            // watting msg
             LogSuccess("Please wait. Verifying ...");
+            BtnLogin.Enabled = false;
+            BtnLogin.Text = "Loading ...";
 
 
+            // Validate User
+            string username = this.TBUsername.Text.Trim();
+            string password = this.TBPassword.Text.Trim();
 
             // Redirect User Accorting to it's Type
             if ((UserType)this.CBType.SelectedIndex == UserType.Instructor)
             {
-                // Validate User
-                var user = context?.InstructorLogins?.FirstOrDefault(
+                InstructorLogin user = await Task.Run(async () =>
+                {
+                    return context?.InstructorLogins.FirstOrDefault(
                     user =>
-                        user.UserName == this.TBUsername.Text.Trim() &&
-                        user.Password == this.TBPassword.Text.Trim()
+                        user.UserName == username &&
+                        user.Password == password
                 );
+                });
+
                 if (user != null)
                 {
                     InstructorForm insForm = new(user?.InsId ?? -1);
@@ -58,11 +66,15 @@ namespace ExaminationSystem
             {
 
                 // Validate User
-                var user = context?.StudentLogins.FirstOrDefault(
+
+                StudentLogin user = await Task.Run(async () =>
+                {
+                    return context?.StudentLogins.FirstOrDefault(
                     user =>
-                        user.UserName == this.TBUsername.Text.Trim() &&
-                        user.Password == this.TBPassword.Text.Trim()
+                        user.UserName == username &&
+                        user.Password == password
                 );
+                });
                 if (user != null)
                 {
                     // User Form
@@ -76,17 +88,25 @@ namespace ExaminationSystem
 
             //LogError("Undefined Error Occurs! :(");
             LogError("Incorrect username or password.");
-
+            BtnLogin.Text = "Login";
+            BtnLogin.Enabled = true;
+        }
+        private void BtnLogin_Click(object sender, EventArgs e)
+        {
+            login();
         }
 
         void LogError(string msg)
         {
             LMsg.ForeColor = Color.LightCoral;
+            Trace.WriteLine(msg);
+            //LMsg.Invoke(new Action<string>(UpdateLTimerText), text);
             LMsg.Text = msg;
         }
 
         void LogSuccess(string msg)
         {
+            Trace.WriteLine(msg);
             LMsg.ForeColor = Color.LightGreen;
             LMsg.Text = msg;
         }
@@ -115,6 +135,33 @@ namespace ExaminationSystem
         private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void TBPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                login();
+                e.Handled = true;
+            }
+        }
+
+        private void TBUsername_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                login();
+                e.Handled = true;
+            }
+        }
+
+        private void CBType_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                login();
+                e.Handled = true;
+            }
         }
     }
 }

@@ -48,10 +48,9 @@
             BtnLogin.Cursor = Cursors.Hand;
             BtnLogin.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnLogin.ForeColor = Color.White;
-            BtnLogin.Location = new Point(447, 448);
-            BtnLogin.Margin = new Padding(3, 4, 3, 4);
+            BtnLogin.Location = new Point(391, 336);
             BtnLogin.Name = "BtnLogin";
-            BtnLogin.Size = new Size(283, 60);
+            BtnLogin.Size = new Size(248, 45);
             BtnLogin.TabIndex = 3;
             BtnLogin.Text = "Login";
             BtnLogin.UseVisualStyleBackColor = false;
@@ -62,40 +61,38 @@
             label1.AutoSize = true;
             label1.Font = new Font("Calibri", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.FromArgb(49, 123, 209);
-            label1.Location = new Point(466, 37);
+            label1.Location = new Point(408, 28);
             label1.Name = "label1";
-            label1.Size = new Size(256, 49);
+            label1.Size = new Size(202, 39);
             label1.TabIndex = 1;
             label1.Text = "Login Account";
             // 
             // TBUsername
             // 
             TBUsername.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            TBUsername.Location = new Point(447, 155);
-            TBUsername.Margin = new Padding(3, 4, 3, 4);
+            TBUsername.Location = new Point(391, 116);
             TBUsername.Name = "TBUsername";
-            TBUsername.Size = new Size(283, 39);
+            TBUsername.Size = new Size(248, 33);
             TBUsername.TabIndex = 0;
             TBUsername.TextChanged += TBUsername_TextChanged;
+            TBUsername.KeyPress += TBUsername_KeyPress;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(357, 115);
+            label2.Location = new Point(312, 86);
             label2.Name = "label2";
-            label2.Size = new Size(50, 20);
+            label2.Size = new Size(38, 15);
             label2.TabIndex = 3;
             label2.Text = "label2";
             // 
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(0, 170, 173);
-            panel1.BackgroundImage = Properties.Resources.loginBg;
             panel1.BackgroundImage = (Image)resources.GetObject("panel1.BackgroundImage");
             panel1.Location = new Point(-1, 1);
-            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(401, 557);
+            panel1.Size = new Size(351, 418);
             panel1.TabIndex = 4;
             // 
             // label3
@@ -103,9 +100,9 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.FromArgb(49, 123, 209);
-            label3.Location = new Point(447, 113);
+            label3.Location = new Point(391, 85);
             label3.Name = "label3";
-            label3.Size = new Size(121, 32);
+            label3.Size = new Size(97, 25);
             label3.TabIndex = 5;
             label3.Text = "Username";
             // 
@@ -114,31 +111,31 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.FromArgb(49, 123, 209);
-            label4.Location = new Point(447, 215);
+            label4.Location = new Point(391, 161);
             label4.Name = "label4";
-            label4.Size = new Size(111, 32);
+            label4.Size = new Size(91, 25);
             label4.TabIndex = 7;
             label4.Text = "Password";
             // 
             // TBPassword
             // 
             TBPassword.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            TBPassword.Location = new Point(447, 256);
-            TBPassword.Margin = new Padding(3, 4, 3, 4);
+            TBPassword.Location = new Point(391, 192);
             TBPassword.Name = "TBPassword";
             TBPassword.PasswordChar = '*';
-            TBPassword.Size = new Size(283, 39);
+            TBPassword.Size = new Size(248, 33);
             TBPassword.TabIndex = 1;
             TBPassword.TextChanged += TBPassword_TextChanged;
+            TBPassword.KeyPress += TBPassword_KeyPress;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label5.ForeColor = Color.FromArgb(49, 123, 209);
-            label5.Location = new Point(447, 316);
+            label5.Location = new Point(391, 237);
             label5.Name = "label5";
-            label5.Size = new Size(65, 32);
+            label5.Size = new Size(51, 25);
             label5.TabIndex = 8;
             label5.Text = "Type";
             // 
@@ -147,28 +144,28 @@
             CBType.DropDownStyle = ComboBoxStyle.DropDownList;
             CBType.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             CBType.FormattingEnabled = true;
-            CBType.Location = new Point(447, 356);
-            CBType.Margin = new Padding(3, 4, 3, 4);
+            CBType.Location = new Point(391, 267);
             CBType.Name = "CBType";
-            CBType.Size = new Size(283, 40);
+            CBType.Size = new Size(248, 33);
             CBType.TabIndex = 2;
             CBType.SelectedIndexChanged += CBType_SelectedIndexChanged;
+            CBType.KeyPress += CBType_KeyPress;
             // 
             // LMsg
             // 
             LMsg.AutoSize = true;
             LMsg.ForeColor = Color.LightCoral;
-            LMsg.Location = new Point(450, 413);
+            LMsg.Location = new Point(394, 310);
             LMsg.Name = "LMsg";
-            LMsg.Size = new Size(0, 20);
+            LMsg.Size = new Size(0, 15);
             LMsg.TabIndex = 9;
             // 
             // LoginForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(787, 555);
+            ClientSize = new Size(689, 416);
             Controls.Add(LMsg);
             Controls.Add(CBType);
             Controls.Add(label5);
@@ -181,7 +178,6 @@
             Controls.Add(TBUsername);
             Controls.Add(BtnLogin);
             FormBorderStyle = FormBorderStyle.FixedDialog;
-            Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "LoginForm";
