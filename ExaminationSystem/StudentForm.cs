@@ -176,7 +176,7 @@ namespace ExaminationSystem
                                where sc.StdId == id
                                select new
                                {
-                                   CourseName = c.CourseName,
+                                   c.CourseName,
                                    CoursesGrades = sc.StdGrade
                                }).ToList();
                 if (results != null)

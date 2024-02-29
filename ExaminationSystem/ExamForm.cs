@@ -42,6 +42,7 @@ namespace ExaminationSystem
         bool flagCheckBox = false;
 
         List<List<QuestChoice>> AnswerList = [];
+        List<Question> QuestionsList;
         public ExamForm()
         {
             InitializeComponent();
@@ -87,8 +88,6 @@ namespace ExaminationSystem
 
         private void ExamForm_Load(object sender, EventArgs e)
         {
-
-            List<Question> QuestionsList;
 
             LAcademicYear.Text = GetCurrentAcademicYear();
 
@@ -336,6 +335,8 @@ namespace ExaminationSystem
 
                 MessageBox.Show("Exam Submitted Successfully", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 //Context?.Dispose();
+
+                //saveAnswers();
             }
             catch (Exception ex)
             {
@@ -396,6 +397,8 @@ namespace ExaminationSystem
         {
             //Submit();
             //Application.Exit();
+
+            Trace.WriteLine(ExamID);
             this.Close();
 
         }
@@ -469,6 +472,27 @@ namespace ExaminationSystem
             }
         }
 
+        void saveAnswers()
+        {
+            int user_sol;
+            string user_sol_str = "";
+            for (int i = 0; i < QuestionsList.Count; i++)
+            {
+                user_sol = UserSolution[i];
+                user_sol_str = user_sol == 0 ? "" : ((char)('A' + user_sol - 1)) + "";
+
+                Trace.WriteLine(user_sol_str);
+
+                Context?.StdQuesExams.Add(new StdQuesExam()
+                {
+                    QuestionId = QuestionsList[i].QuestionId,
+                    StdId = studentID,
+
+                    StdAnswer = user_sol_str,
+                    ExamId = ExamID,
+                });
+            }
+        }
         private void ExamForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Context?.Dispose();
